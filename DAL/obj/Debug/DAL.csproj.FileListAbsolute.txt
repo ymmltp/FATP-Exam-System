@@ -1,0 +1,10 @@
+C:\Users\1382919\source\repos\FATP Exam System\DAL\bin\Debug\DAL.dll
+C:\Users\1382919\source\repos\FATP Exam System\DAL\bin\Debug\DAL.pdb
+C:\Users\1382919\source\repos\FATP Exam System\DAL\bin\Debug\Model.dll
+C:\Users\1382919\source\repos\FATP Exam System\DAL\bin\Debug\MySql.Data.dll
+C:\Users\1382919\source\repos\FATP Exam System\DAL\bin\Debug\Model.pdb
+C:\Users\1382919\source\repos\FATP Exam System\DAL\obj\Debug\DAL.csprojAssemblyReference.cache
+C:\Users\1382919\source\repos\FATP Exam System\DAL\obj\Debug\DAL.csproj.CoreCompileInputs.cache
+C:\Users\1382919\source\repos\FATP Exam System\DAL\obj\Debug\DAL.csproj.CopyComplete
+C:\Users\1382919\source\repos\FATP Exam System\DAL\obj\Debug\DAL.dll
+C:\Users\1382919\source\repos\FATP Exam System\DAL\obj\Debug\DAL.pdb
