@@ -11,11 +11,7 @@ namespace FATP_Exam_System
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["UserName"] != null)
-            {
-                string user = Session["UserName"].ToString();
-                User_ID.Text = "Welcome[ " + Session["UserName"].ToString() + " ]";
-            }
+
         }
     }
 }

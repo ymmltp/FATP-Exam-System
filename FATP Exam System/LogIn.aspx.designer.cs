@@ -13,22 +13,31 @@ namespace FATP_Exam_System {
     public partial class LogIn {
         
         /// <summary>
-        /// cntid control.
+        /// formLogin control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label cntid;
+        protected global::System.Web.UI.HtmlControls.HtmlForm formLogin;
         
         /// <summary>
-        /// cpassword control.
+        /// TextBox1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label cpassword;
+        protected global::System.Web.UI.WebControls.TextBox TextBox1;
+        
+        /// <summary>
+        /// TextBox2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBox2;
         
         /// <summary>
         /// lpassword control.
@@ -40,31 +49,31 @@ namespace FATP_Exam_System {
         protected global::System.Web.UI.WebControls.Label lpassword;
         
         /// <summary>
-        /// cuser control.
+        /// SeleUser control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label cuser;
+        protected global::System.Web.UI.WebControls.DropDownList SeleUser;
         
         /// <summary>
-        /// luser control.
+        /// lusertype control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label luser;
+        protected global::System.Web.UI.WebControls.Label lusertype;
         
         /// <summary>
-        /// cexamtype control.
+        /// SeleExam control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label cexamtype;
+        protected global::System.Web.UI.WebControls.DropDownList SeleExam;
         
         /// <summary>
         /// lexamtype control.
@@ -74,5 +83,14 @@ namespace FATP_Exam_System {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lexamtype;
+        
+        /// <summary>
+        /// ButtonLogIn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonLogIn;
     }
 }

@@ -11,7 +11,20 @@ namespace FATP_Exam_System
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+                if (Session["UserName"] != null)
+                {
+                    if (Int32.Parse(Session["Power"].ToString()) < 3)
+                    {
+                        Response.Redirect("Error.aspx", false);
+                    }
+                }
+                else
+                {
+                    Response.Redirect("Error.aspx", false);
+                }
+            }
         }
     }
 }

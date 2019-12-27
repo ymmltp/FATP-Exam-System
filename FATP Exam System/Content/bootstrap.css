@@ -2783,6 +2783,8 @@ select[multiple].input-lg {
 }
 .has-feedback .form-control {
   padding-right: 42.5px;
+    top: 0px;
+    left: 0px;
 }
 .form-control-feedback {
   position: absolute;

@@ -48,7 +48,6 @@ namespace Model
                 this._userGroup = value;
             }
         }
-
         public string NTID
         {
             get

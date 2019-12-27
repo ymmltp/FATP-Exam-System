@@ -11,7 +11,17 @@ namespace FATP_Exam_System
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+                if (Session["UserName"] != null)
+                {
+                    Error_Text.Text = "Sorry, you have no access to this page.Please contact with Admin...";
+                }
+                else
+                {
+                    Error_Text.Text = "Please Sign in...";
+                }
+            }
         }
     }
 }

@@ -11,9 +11,14 @@ namespace DAL
     {
         private ManageDatabase sp = new ManageDatabase();
         #region Project(select insert delete)
-        public DataTable GetProject_Table()
+        public DataTable GetProject_Table(string project)
         {
-            string sql = "SELECT (@i:= @i + 1) AS IndexID,Project FROM project,(SELECT @i:= 0) as A WHERE 1 ORDER by Project";
+            string sql = "SELECT (@i:= @i + 1) AS IndexID,Project FROM project,(SELECT @i:= 0) as A WHERE 1 ";
+            if (!string.IsNullOrEmpty(project) && project!="ALL")
+            {
+                sql += " and Project='" + project + "'";
+            }
+            sql += " ORDER by Project";
             DataTable dt = sp.Query(sql);
             return dt;
         }
@@ -48,9 +53,14 @@ namespace DAL
         #endregion
 
         #region Department(select insert delete)
-        public DataTable GetDepartment_Table()
+        public DataTable GetDepartment_Table(string department)
         {
-            string sql = "SELECT (@i:= @i + 1) AS IndexID,Department FROM department,(SELECT @i:= 0) as A WHERE 1 ORDER by Department";
+            string sql = "SELECT (@i:= @i + 1) AS IndexID,Department FROM department,(SELECT @i:= 0) as A WHERE 1 ";
+            if (!string.IsNullOrEmpty(department) && department != "ALL")
+            {
+                sql += " and Department='" + department + "'";
+            }
+            sql += " ORDER by Department";
             DataTable dt = sp.Query(sql);
             return dt;
         }
@@ -126,16 +136,27 @@ namespace DAL
             string sql = "SELECT (@i:= @i + 1) AS IndexID,B.* FROM examconfig B,(SELECT @i:= 0) as A WHERE 1 ";
             if (!string.IsNullOrEmpty(examName))
             {
-                sql += " and ExamName='" + examName + "'";
+                sql += " and ExamName ='" + examName + "'";
             }
             sql += " ORDER by ExamID";
             DataTable dt = sp.Query(sql);
             return dt;
         }
-        public string Add_Exam(string examname,string totalscore,string passscore,string singlecount,string singlescore,string miltiplecount,string miltiplescore)
+        public DataTable GetExamConfig_by_ExamType(string examType)
+        {
+            string sql = "SELECT (@i:= @i + 1) AS IndexID,B.* FROM examconfig B,(SELECT @i:= 0) as A WHERE 1 ";
+            if (!string.IsNullOrEmpty(examType) && examType != "0")
+            {
+                sql += " and ExamID ='" + examType + "'";
+            }
+            sql += " ORDER by ExamID";
+            DataTable dt = sp.Query(sql);
+            return dt;
+        }
+        public string Add_Exam(string examname,string totalscore,string passscore,string singlecount,string singlescore,string multiplecount,string multiplescore)
         {
             string mesg = "Add Exam success!";
-            string sql = "INSERT into examconfig (ExamName,TotalScore,PassScore,SingleCount,EachSingleScore,MiltipleCount,EachMiltipleScore) VALUES('" + examname + "','" + totalscore + "','" + passscore + "','" + singlecount + "','" + singlescore + "','" + miltiplecount + "','" + miltiplescore + "' )";
+            string sql = "INSERT into examconfig (ExamName,TotalScore,PassScore,SingleCount,EachSingleScore,MultipleCount,EachmultipleScore) VALUES('" + examname + "','" + totalscore + "','" + passscore + "','" + singlecount + "','" + singlescore + "','" + multiplecount + "','" + multiplescore + "' )";
             try
             {
                 sp.Insert(sql);
@@ -146,10 +167,10 @@ namespace DAL
             }
             return mesg;
         }
-        public string Update_Exam(string ExamID, string examname, string totalscore, string passscore, string singlecount, string singlescore, string miltiplecount, string miltiplescore)
+        public string Update_Exam(string ExamID, string examname, string totalscore, string passscore, string singlecount, string singlescore, string multiplecount, string multiplescore)
         {
             string mesg = "Update Exam success!";
-            string sql = "UPDATE examconfig SET ExamName='" + examname + "',TotalScore='" + totalscore + "',PassScore='" + passscore + "',SingleCount='" + singlecount + "',EachSingleScore='" + singlescore + "',MiltipleCount='" + miltiplecount + "',EachMiltipleScore='" + miltiplescore + "' WHERE examID='" + ExamID + "'";
+            string sql = "UPDATE examconfig SET ExamName='" + examname + "',TotalScore='" + totalscore + "',PassScore='" + passscore + "',SingleCount='" + singlecount + "',EachSingleScore='" + singlescore + "',MultipleCount='" + multiplecount + "',EachMultipleScore='" + multiplescore + "' WHERE examID='" + ExamID + "'";
             try
             {
                 sp.Update(sql);
@@ -181,7 +202,7 @@ namespace DAL
         {
             string sql = @"SELECT (@i:=@i+1) AS IndexID, D.* FROM 
                         (SELECT C.ExamName as ExamType,B.ID,B.NTID, B.Department, B.Project, B.UserLevel FROM userlist B INNER JOIN examconfig C on B.ExamType = C.ExamID WHERE 1 ";
-            if (!string.IsNullOrEmpty(ExamType))
+            if (!string.IsNullOrEmpty(ExamType)&&ExamType!="0")
             {
                 sql += " AND B.ExamType='" + ExamType + "'";
             }
@@ -189,11 +210,11 @@ namespace DAL
             {
                 sql += " AND B.NTID='" + NTID + "'";
             }
-            if (!string.IsNullOrEmpty(Project))
+            if (!string.IsNullOrEmpty(Project)&& Project!="ALL")
             {
                 sql += " AND B.Project='" + Project + "'";
             }
-            if (!string.IsNullOrEmpty(Department))
+            if (!string.IsNullOrEmpty(Department)&Department!="ALL")
             {
                 sql += " AND B.Department='" + Department + "'";
             }
@@ -246,11 +267,11 @@ namespace DAL
         #endregion
 
         #region questionlist(select insert update delete)
-        public DataTable GetQuestion_Table(string ExamType,string QuestionType)
+        public DataTable GetQuestion_Table(string ExamType=null,string QuestionType=null)
         {
             string sql = @"SELECT (@i:= @i + 1) AS IndexID,D.* FROM
-                            (SELECT B.ID, C.ExamName AS ExamType, B.Question, B.QuestionType, B.Select1, B.Select2, B.Select3, B.Select4 FROM questionlist B INNER JOIN examconfig C on B.ExamType = C.ExamID WHERE 1 ";
-            if (!string.IsNullOrEmpty(ExamType))
+                            (SELECT B.ID, C.ExamName AS ExamType, B.Question, B.QuestionType, B.SelectA, B.SelectB, B.SelectC, B.SelectD, B.Answer FROM questionlist B INNER JOIN examconfig C on B.ExamType = C.ExamID WHERE 1 ";
+            if (!string.IsNullOrEmpty(ExamType)&&ExamType!="0")
             {
                 sql += " and B.ExamType='" + ExamType + "'";
             }
@@ -262,24 +283,24 @@ namespace DAL
             DataTable dt = sp.Query(sql);
             return dt;
         }
-        public string Add_Question(string ExamType, string question, string questionType, string s1, string s2, string s3, string s4) 
+        public string Add_Question(string ExamType, string question, string questionType, string s1, string s2, string answer,string s3, string s4) 
         {
             string mesg = "Add Question success!";
-            string sql = "INSERT INTO questionlist (ExamType,Question,QuestionType,Select1,Select2,Select3,Select4) VALUES ('" + ExamType + "','" + question + "','" + questionType + "','" + s1 + "','" + s2 + "','" + s3 + "','" + s4 + "')";
+            string sql = "INSERT INTO questionlist (ExamType,Question,QuestionType,SelectA,SelectB,SelectC,SelectD,Answer) VALUES ('" + ExamType + "','" + question + "','" + questionType + "','" + s1 + "','" + s2 + "','" + s3 + "','" + s4 + "','" + answer + "')";
             try
             {
                 sp.Insert(sql);
             }
             catch (Exception e)
             {
-                mesg = "Add PowerUser fail!\n" + e.Message;
+                mesg = "Add Question fail!\n" + e.Message;
             }
             return mesg;
         }
-        public string Update_Question(string ID,string ExamType, string question, string questionType, string s1, string s2, string s3 = "", string s4 = "")
+        public string Update_Question(string ID,string ExamType, string question, string questionType, string s1, string s2,string answer, string s3, string s4)
         {
             string mesg = "Update Question success!";
-            string sql = "UPDATE questionlist SET ExamType='" + ExamType + "',Question='" + question + "',QuestionType='" + questionType + "',Select1='" + s1 + "',Select2='" + s2 + "',Select3='" + s3 + "',Select4='" + s4 + "' WHERE ID='" + ID + "'";
+            string sql = "UPDATE questionlist SET ExamType='" + ExamType + "',Question='" + question + "',QuestionType='" + questionType + "',SelectA='" + s1 + "',SelectB='" + s2 + "',SelectC='" + s3 + "',SelectD='" + s4 + "',Answer='" + answer + "' WHERE ID='" + ID + "'";
             try
             {
                 sp.Insert(sql);

@@ -38,23 +38,26 @@ namespace DAL
         {
             userinfo.NTID = ntid;
             userinfo.DisplayName = ad.GetADDispalyName(ntid);
-            if (IsPowerUser(ntid))
+            if ( examtype == "0")
             {
-                userinfo.UserGroup = (UserGroupEnum)(Enum.Parse(typeof(UserGroupEnum), "Power"));
-                userinfo.ExamType = Int32.Parse(examtype);
+                if (IsPowerUser(ntid))
+                {
+                    userinfo.UserGroup = (UserGroupEnum)(Enum.Parse(typeof(UserGroupEnum), "Power"));
+                    userinfo.ExamType = Int32.Parse(examtype);
+                    userinfo.Project = poweruser.Rows[0]["Project"].ToString();
+                    userinfo.Department = poweruser.Rows[0]["Department"].ToString();
+                }
+                else {
+                    userinfo.ExamType = 999999;  //Error
+                }
             }
             else {
-                if (examtype != "0") //不是 _blank
+                if (IsJoinExam(ntid, examtype))
                 {
-                    if (IsJoinExam(ntid, examtype))
-                    {
-                        userinfo.ExamType = Int32.Parse(examtype);
-                        userinfo.UserGroup = (UserGroupEnum)(Enum.Parse(typeof(UserGroupEnum), userlist.Rows[0]["UserLevel"].ToString()));
-                    }
-                    else
-                    {
-                        userinfo.ExamType = 999999;  //Error
-                    }
+                    userinfo.ExamType = Int32.Parse(examtype);
+                    userinfo.UserGroup = (UserGroupEnum)(Enum.Parse(typeof(UserGroupEnum), userlist.Rows[0]["UserLevel"].ToString()));
+                    userinfo.Project= userlist.Rows[0]["Project"].ToString();
+                    userinfo.Department = userlist.Rows[0]["Department"].ToString();
                 }
                 else
                 {

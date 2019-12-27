@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="ADHelper.cs" />
     <Compile Include="Auth.cs" />
+    <Compile Include="Exam.cs" />
     <Compile Include="GetData.cs" />
     <Compile Include="ManageDatabase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

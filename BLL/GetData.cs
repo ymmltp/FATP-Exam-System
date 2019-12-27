@@ -12,9 +12,9 @@ namespace BLL
         private static readonly DAL.GetData _myinfo = new DAL.GetData();
 
         #region Project(select insert delete)
-        public static DataTable GetProject_Table()
+        public static DataTable GetProject_Table(string project=null)
         {
-            return _myinfo.GetProject_Table();
+            return _myinfo.GetProject_Table(project);
         }
         public static string Add_Project(string project)
         {
@@ -27,9 +27,9 @@ namespace BLL
         #endregion
 
         #region Department(select insert delete)
-        public static DataTable GetDepartment_Table()
+        public static DataTable GetDepartment_Table(string department=null)
         {
-            return _myinfo.GetDepartment_Table();
+            return _myinfo.GetDepartment_Table(department);
         }
         public static string Add_Department(string department)
         {
@@ -61,13 +61,13 @@ namespace BLL
         {
             return _myinfo.GetExamConfig_Table(examName);
         }
-        public static string Add_Exam(string examname, string totalscore, string passscore, string singlecount, string singlescore, string miltiplecount, string miltiplescore)
+        public static string Add_Exam(string examname, string totalscore, string passscore, string singlecount, string singlescore, string multiplecount, string multiplescore)
         {
-            return _myinfo.Add_Exam(examname, totalscore, passscore, singlecount, singlescore, miltiplecount, miltiplescore);
+            return _myinfo.Add_Exam(examname, totalscore, passscore, singlecount, singlescore, multiplecount, multiplescore);
         }
-        public static string Update_Exam(string ExamID, string examname, string totalscore, string passscore, string singlecount, string singlescore, string miltiplecount, string miltiplescore)
+        public static string Update_Exam(string ExamID, string examname, string totalscore, string passscore, string singlecount, string singlescore, string multiplecount, string multiplescore)
         {
-            return _myinfo.Update_Exam(ExamID, examname, totalscore, passscore, singlecount, singlescore, miltiplecount, miltiplescore);
+            return _myinfo.Update_Exam(ExamID, examname, totalscore, passscore, singlecount, singlescore, multiplecount, multiplescore);
         }
         public static string Delete_Exam(string ExamID)
         {
@@ -95,17 +95,17 @@ namespace BLL
         #endregion
 
         #region questionlist(select insert update delete)
-        public static DataTable GetQuestion_Table(string ExamType, string QuestionType)
+        public static DataTable GetQuestion_Table(string ExamType=null, string QuestionType=null)
         {
             return _myinfo.GetQuestion_Table(ExamType, QuestionType);
         }
-        public static string Add_Question(string ExamType, string question, string questionType, string s1, string s2, string s3=null, string s4=null)
+        public static string Add_Question(string ExamType, string question, string questionType, string s1, string s2,string answer, string s3=null, string s4=null)
         {
-            return _myinfo.Add_Question(ExamType, question, questionType, s1, s2, s3, s4);
+            return _myinfo.Add_Question(ExamType, question, questionType, s1, s2,answer, s3, s4);
         }
-        public static string Update_Question(string ID, string ExamType, string question, string questionType, string s1, string s2, string s3 = null, string s4 = null)
+        public static string Update_Question(string ID, string ExamType, string question, string questionType, string s1, string s2,string answer, string s3 = null, string s4 = null)
         {
-            return _myinfo.Update_Question(ID, ExamType, question, questionType, s1, s2, s3, s4);
+            return _myinfo.Update_Question(ID, ExamType, question, questionType, s1, s2, answer, s3, s4);
         }
         public static string Delete_Question(string ID)
         {

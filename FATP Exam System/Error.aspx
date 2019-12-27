@@ -2,8 +2,9 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
         <div class="container-fiuled" style="height:500px">  
          <div class="row">
-           <h3> Sorry, you have no access to this page.Please contact with Admin.</h3>
+             <h3> 
+                 <asp:Label runat="server" ID="Error_Text"></asp:Label>
+             </h3>
         </div>
     </div>
 </asp:Content>
-S

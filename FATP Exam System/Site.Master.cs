@@ -14,11 +14,14 @@ namespace FATP_Exam_System
         {
             if (!IsPostBack)
             {
-                User_ID.Text = "Log in";
-                //User_ID.Text = "Welcome[ " + Session["UserName"] + " ]";
-                //string user= session
+                if (Session["UserName"] != null)
+                {
+                    string user = Session["UserName"].ToString();
+                    User_ID.Text = "Welcome [ " + Session["UserName"].ToString() + " ]";
+                }
             }
         }
+
 
     }
 }
