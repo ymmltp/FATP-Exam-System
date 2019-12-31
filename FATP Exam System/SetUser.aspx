@@ -92,9 +92,6 @@
     </div>
 
 <%--upload model--%>
-
-
-
 </div>
     <script src="Scripts/bootstrap-select.min.js"></script>
     <script src="Scripts/Customer/SettingJS.js"></script>

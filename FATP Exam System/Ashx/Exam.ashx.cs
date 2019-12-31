@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Data;
 using Model;
-using System.Data;
+using System.ServiceModel.Web;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Json;
 
 namespace FATP_Exam_System.Ashx
 {
@@ -20,8 +21,15 @@ namespace FATP_Exam_System.Ashx
             string examtype = HttpContext.Current.Session["ExamType"].ToString();
             string ql = context.Request.QueryString["qlist"];
             List<QuestionInfo> qlist = new List<QuestionInfo>();
-            if(!String.IsNullOrEmpty(ql))
-                qlist = Newtonsoft.Json.JsonConvert.DeserializeObject<dynamic>(ql); 
+            if (!String.IsNullOrEmpty(ql))
+            {
+                DataContractJsonSerializer _Json = new DataContractJsonSerializer(qlist.GetType());
+                byte[] _Using = System.Text.Encoding.UTF8.GetBytes(ql);
+                System.IO.MemoryStream _MemoryStream = new System.IO.MemoryStream(_Using);
+                _MemoryStream.Position = 0;
+                qlist = (List<QuestionInfo>)_Json.ReadObject(_MemoryStream);
+            }
+                //qlist = Newtonsoft.Json.JsonConvert.DeserializeObject<List<QuestionInfo>>; 
                       
             string json = "";
             Dictionary<int, List<QuestionInfo>> finalresult = new Dictionary<int, List<QuestionInfo>>();
@@ -42,6 +50,9 @@ namespace FATP_Exam_System.Ashx
                     BLL.Exam.Final_Result_Check(qlist, out callbackql, out finalscore);
                     finalresult.Add(finalscore, callbackql);
                     json = Newtonsoft.Json.JsonConvert.SerializeObject(finalresult);
+                    break;
+                default:
+                    json = "Sorry,don't have such function...Please check your url";
                     break;
             }
             context.Response.Write(json);

@@ -10,7 +10,7 @@ namespace FATP_Exam_System.Ashx
     /// <summary>
     /// Summary description for Auth
     /// </summary>
-    public class Auth : IHttpHandler
+    public class Auth : IHttpHandler, System.Web.SessionState.IReadOnlySessionState
     {
 
         public void ProcessRequest(HttpContext context)
@@ -31,6 +31,11 @@ namespace FATP_Exam_System.Ashx
                     break;
                 case "GetUserInfo":
                     userinfo = BLL.Auth.GetUserInfo(ntid, role, examtype);
+                    json = Newtonsoft.Json.JsonConvert.SerializeObject(userinfo);
+                    break;
+                case "UserInfo":
+                    userinfo.NTID = HttpContext.Current.Session["NTID"].ToString();
+                    userinfo.DisplayName = HttpContext.Current.Session["UserName"].ToString();
                     json = Newtonsoft.Json.JsonConvert.SerializeObject(userinfo);
                     break;
                 default:

@@ -13,7 +13,14 @@ namespace FATP_Exam_System
         {
             if (!IsPostBack)
             {
-                if (Session["UserName"] == null)
+                if (Session["UserName"] != null)
+                {
+                    if (Int32.Parse(Session["Power"].ToString()) < 3)
+                    {
+                        Response.Redirect("Error.aspx", false);
+                    }
+                }
+                else
                 {
                     Response.Redirect("Error.aspx", false);
                 }

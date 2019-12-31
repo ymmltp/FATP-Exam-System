@@ -9,7 +9,7 @@ namespace FATP_Exam_System.Ashx
     /// <summary>
     /// Summary description for Add
     /// </summary>
-    public class Add : IHttpHandler
+    public class Add : IHttpHandler, System.Web.SessionState.IReadOnlySessionState
     {
 
         public void ProcessRequest(HttpContext context)
@@ -65,6 +65,7 @@ namespace FATP_Exam_System.Ashx
                     json = Newtonsoft.Json.JsonConvert.SerializeObject(callback);
                     break;
                 default:
+                    json = "Sorry,don't have such function...Please check your url";
                     break;
             }
             context.Response.Write(json);

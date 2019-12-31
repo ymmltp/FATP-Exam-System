@@ -32,19 +32,19 @@ namespace FATP_Exam_System.Ashx
             DataTable dt = new DataTable();
             string json = "";
 
-            if (string.IsNullOrEmpty(department))
-            {
-                department = HttpContext.Current.Session["Department"].ToString();
-            }
-            if (string.IsNullOrEmpty(project))
-            {
-                project = HttpContext.Current.Session["Project"].ToString();
-            }
-            if (string.IsNullOrEmpty(examtype) && examtype!="0")
+            //特定的管理员只能对其管理的考试和所在的部门，项目进行管理？？
+            //if (string.IsNullOrEmpty(department))
+            //{
+            //    department = HttpContext.Current.Session["Department"].ToString();
+            //}
+            //if (string.IsNullOrEmpty(project))
+            //{
+            //    project = HttpContext.Current.Session["Project"].ToString();
+            //}
+            if (string.IsNullOrEmpty(examtype))
             {
                 examtype = HttpContext.Current.Session["ExamType"].ToString();
             }
-
 
             switch (type)
             {
@@ -55,10 +55,7 @@ namespace FATP_Exam_System.Ashx
                     dt = BLL.GetData.GetDepartment_Table(department);
                     break;
                 case "exam":
-                    dt = BLL.GetData.GetExamConfig_Table(examname);
-                    break;
-                case "examscore":
-                    dt = BLL.GetData.GetExamScore_Table(examtype,ntid);
+                    dt = BLL.GetData.GetExamConfig_by_ExamType(examtype);
                     break;
                 case "question":
                     dt = BLL.GetData.GetQuestion_Table(examtype,questiontype);
@@ -68,6 +65,9 @@ namespace FATP_Exam_System.Ashx
                     break;
                 case "poweruser":
                     dt = BLL.GetData.GetPoweruser_Table();
+                    break;
+                default:
+                    json = "Sorry,don't have such function...Please check your url";
                     break;
             }
             json = Newtonsoft.Json.JsonConvert.SerializeObject(dt);

@@ -343,6 +343,51 @@ namespace DAL
             DataTable dt = sp.Query(sql);
             return dt;
         }
+        public DataTable GetExamScore_Table(string examtype, string project, string department, string NTID)
+        {
+            string sql = @"SELECT (@i:=@i+1)as IndexID,D.ExamName,tmp.* from examconfig D INNER JOIN
+                        (select  A.*,B.Project,B.Department from examscore A inner JOIN userlist B on A.NTID=B.NTID AND a.ExamType=b.ExamType WHERE 1 ";
+            if (!string.IsNullOrEmpty(examtype))
+            {
+                string[] tmp = examtype.Split(',');
+                string sqlstring = "";
+                for (int i = 0; i < tmp.Length; i++)
+                {
+                    sqlstring += "'" + tmp[i] + "',";
+                }
+                sqlstring = sqlstring.Substring(0, sqlstring.Length - 1);
+                sql += " and A.ExamType in (" + sqlstring + ")";
+            }
+            if (!string.IsNullOrEmpty(project))
+            {
+                string[] tmp = project.Split(',');
+                string sqlstring = "";
+                for (int i = 0; i < tmp.Length; i++)
+                {
+                    sqlstring += "'" + tmp[i] + "',";
+                }
+                sqlstring = sqlstring.Substring(0, sqlstring.Length - 1);
+                sql += " and B.project in(" + sqlstring + ")";
+            }
+            if (!string.IsNullOrEmpty(department))
+            {
+                string[] tmp = department.Split(',');
+                string sqlstring = "";
+                for (int i = 0; i < tmp.Length; i++)
+                {
+                    sqlstring += "'" + tmp[i] + "',";
+                }
+                sqlstring = sqlstring.Substring(0, sqlstring.Length - 1);
+                sql += " AND B.Department in(" + sqlstring + ") ";
+            }
+            if (!string.IsNullOrEmpty(NTID))
+            {
+                sql += " and B.NTID='" + NTID + "'";
+            }
+            sql += @")tmp ON D.ExamID = tmp.ExamType,(SELECT @i:= 0) as C ORDER BY tmp.ExamType,tmp.Department,tmp.Project";
+            DataTable dt = sp.Query(sql);
+            return dt;
+        }
         public string Replace_ExamScore(string ExamType, string NTID, string Score)
         {
             string mesg = "Update Score success!";

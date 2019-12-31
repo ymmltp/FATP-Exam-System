@@ -61,6 +61,10 @@ namespace BLL
         {
             return _myinfo.GetExamConfig_Table(examName);
         }
+        public static DataTable GetExamConfig_by_ExamType(string examType)
+        {
+            return _myinfo.GetExamConfig_by_ExamType(examType);
+        }
         public static string Add_Exam(string examname, string totalscore, string passscore, string singlecount, string singlescore, string multiplecount, string multiplescore)
         {
             return _myinfo.Add_Exam(examname, totalscore, passscore, singlecount, singlescore, multiplecount, multiplescore);
@@ -114,9 +118,13 @@ namespace BLL
         #endregion
 
         #region examscore (select replace delete)
-        public static DataTable GetExamScore_Table(string examtype, string NTID = null)
+        public static DataTable GetExamScore_Table(string examtype=null, string NTID = null)
         {
             return _myinfo.GetExamScore_Table(examtype, NTID);
+        }
+        public static DataTable GetExamScore_Table(string examtype, string project, string department, string NTID)
+        {
+            return _myinfo.GetExamScore_Table(examtype, project, department, NTID);
         }
         public static string Replace_ExamScore(string ExamType, string NTID, string Score)
         {

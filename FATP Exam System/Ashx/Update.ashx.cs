@@ -8,16 +8,16 @@ namespace FATP_Exam_System.Ashx
     /// <summary>
     /// Summary description for Update
     /// </summary>
-    public class Update : IHttpHandler
+    public class Update : IHttpHandler, System.Web.SessionState.IReadOnlySessionState
     {
 
         public void ProcessRequest(HttpContext context)
         {
             context.Response.ContentType = "text/plain";
             string type = context.Request.QueryString["type"];
-            string ntid = context.Request.QueryString["ntid"];
+            string ntid = HttpContext.Current.Session["NTID"].ToString();
             string role = context.Request.QueryString["role"];
-            string examtype = context.Request.QueryString["examtype"];
+            string examtype = HttpContext.Current.Session["ExamType"].ToString();
             string userID = context.Request.QueryString["userID"];
             string questionID = context.Request.QueryString["questionID"];
             string department = context.Request.QueryString["department"];
@@ -25,6 +25,7 @@ namespace FATP_Exam_System.Ashx
             string examname = context.Request.QueryString["examname"];
             string totalscore = context.Request.QueryString["totalscore"];
             string passscore = context.Request.QueryString["passscore"];
+            string score = context.Request.QueryString["score"];
             string multiplescore = context.Request.QueryString["multiplescore"];
             string multiplecount = context.Request.QueryString["multiplecount"];
             string singlescore = context.Request.QueryString["singlescore"];
@@ -49,6 +50,9 @@ namespace FATP_Exam_System.Ashx
                     break;
                 case "question":
                     callback = BLL.GetData.Update_Question(questionID, examtype, question, questiontype, s1, s2, answer, s3, s4);
+                    break;
+                case "score":
+                    callback = BLL.GetData.Replace_ExamScore(examtype, ntid, score);
                     break;
             }
             json = Newtonsoft.Json.JsonConvert.SerializeObject(callback);

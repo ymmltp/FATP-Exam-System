@@ -52,6 +52,8 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel.Web" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
@@ -135,8 +137,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\examformat.css" />
+    <Content Include="ExcelUploadDemo.aspx" />
     <Content Include="PersonalScore.aspx" />
+    <Content Include="Scripts\Customer\ExacelUpload.js" />
     <Content Include="Scripts\Customer\Exam.js" />
+    <Content Include="Scripts\Customer\getScore.js" />
     <Content Include="webinicon.ico" />
     <Content Include="webicon2.ico" />
     <Content Include="ExtendedFile.aspx" />
@@ -177,6 +182,7 @@
     <Content Include="excelModel\QuestionModel.xlsx" />
     <Content Include="excelModel\UserModel.xlsx" />
     <Content Include="Ashx\Exam.ashx" />
+    <Content Include="Ashx\ScoreSearch.ashx" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="images\Green Point_WhiteHorzontal.png" />
     <Content Include="images\jabil.png" />
@@ -234,6 +240,16 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="Ashx\Exam.ashx.cs">
       <DependentUpon>Exam.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Ashx\ScoreSearch.ashx.cs">
+      <DependentUpon>ScoreSearch.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="ExcelUploadDemo.aspx.cs">
+      <DependentUpon>ExcelUploadDemo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ExcelUploadDemo.aspx.designer.cs">
+      <DependentUpon>ExcelUploadDemo.aspx</DependentUpon>
     </Compile>
     <Compile Include="ExtendedFile.aspx.cs">
       <DependentUpon>ExtendedFile.aspx</DependentUpon>

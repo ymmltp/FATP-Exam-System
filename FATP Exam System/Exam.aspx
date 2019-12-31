@@ -12,7 +12,7 @@
                 <div class="my-col my-panel-default">
                 <div class="my-panel-heading" style="color:white;background-color: #3CB371;"><b>Question List</b></div>
                 <div class="my-panel-body" >   
-                    <ul id="question-list">
+                    <ul id="question-list" style="display:none">
                         <%--题号--%>
                     </ul>
                 </div>
@@ -30,25 +30,41 @@
                 </div>
                 <div class="exam-select">
                     <ul id="select-list">
-<%--                    <li class="select-list-item"><input type="radio" id="s1" name="Q1"/><label for="s1">SELECT1</label></li>
-                        <li class="select-list-item"><input type="radio" id="s2" name="Q1"/><label for="s2">SELECT2</label></li>
-                        <li class="select-list-item"><input type="radio" id="s3" name="Q1"/><label for="s3">SELECT3</label></li>
-                        <li class="select-list-item"><input type="radio" id="s4" name="Q1"/><label for="s4">SELECT4</label></li>--%>
-                       <%-- <li class="select-list-item"><input type="checkbox" id="s1" name="Q2"/><label for="s1">SELECT1</label></li>
-                        <li class="select-list-item"><input type="checkbox" id="s2" name="Q2"/><label for="s2">SELECT2</label></li>
-                        <li class="select-list-item"><input type="checkbox" id="s3" name="Q2"/><label for="s3">SELECT3</label></li>
-                        <li class="select-list-item"><input type="checkbox" id="s4" name="Q2"/><label for="s4">SELECT4</label></li>--%>
+                        <%--选项--%>
                     </ul>
                 </div>
                 <div class="exam-function">
-                    <div class="col-lg-9"></div>
-                    <div class="col-lg-1"><button class="btn btn-primary" type="button" id="btn-last" type="button" style="font-size:14px;background-color:#008651;display:none;" onclick="Last_Question()">«««</button></div>
-                    <div class="col-lg-1"><button class="btn btn-primary" type="button" id="btn-next" type="button" style="font-size:14px;background-color:#008651" onclick="Start_Exam()">Start</button></div>                   
+                    <div class="col-lg-5"></div>
+                    <div class="col-lg-2"><button class="btn btn-primary" type="button" id="btn-start" style="font-size:14px;">Start</button></div>                   
+                    <div class="col-lg-2"></div>
+                    <div class="col-lg-1"><button class="btn btn-primary" type="button" id="btn-last" style="font-size:14px;background-color:#008651; display:none;">«««</button></div>
+                    <div class="col-lg-1"><button class="btn btn-primary" type="button" id="btn-next" style="font-size:14px;background-color:#008651; display:none;">»»»</button></div>                   
+                    <div class="col-lg-1"><button class="btn btn-warning" type="button" id="btn-submit" style="font-size:14px;display:none;">Submit</button></div>
                 </div>
             </div>  
             
         </div>
     </div>
+
+    <%--delete model--%>
+    <div class="modal fade" id="SubmitModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+      <div class="modal-dialog" role="document" style="width:400px">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Check</h5>
+          </div>
+          <div class="modal-body">
+                <label class="col-form-label">You haven't answer all question.</label>
+                <label class="col-form-label">Sure you want to Submit?</label>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-primary" id="SureBut" type="button">Sure</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
 </div>
     <script src="Scripts/Customer/Exam.js"></script>
     <script>

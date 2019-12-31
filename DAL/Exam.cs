@@ -107,7 +107,7 @@ namespace DAL
             List<QuestionInfo> tmp = qlist;
             for (int i = 0; i < tmp.Count; i++)
             {
-                if (tmp[i].Answer == tmp[i].UserAnswer)
+                if (compareArr(tmp[i].Answer,tmp[i].UserAnswer))
                 {
                     tmp[i].FinalResult = true;
                 }
@@ -117,6 +117,13 @@ namespace DAL
             }
             finalScore = Final_Score(tmp);
             finalqlist = tmp;
+        }
+        //比较数组是否一样
+        public static bool compareArr(string[] arr1, string[] arr2)
+        {
+            var q = from a in arr1 join b in arr2 on a equals b select a;
+            bool flag = arr1.Length == arr2.Length && q.Count() == arr1.Length;
+            return flag;//内容相同返回true,反之返回false。
         }
 
         //最终成绩核算
