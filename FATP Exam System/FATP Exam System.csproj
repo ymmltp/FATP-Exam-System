@@ -142,6 +142,7 @@
     <Content Include="Scripts\Customer\ExacelUpload.js" />
     <Content Include="Scripts\Customer\Exam.js" />
     <Content Include="Scripts\Customer\getScore.js" />
+    <Content Include="Scripts\Customer\xlsx.full.min.js" />
     <Content Include="webinicon.ico" />
     <Content Include="webicon2.ico" />
     <Content Include="ExtendedFile.aspx" />

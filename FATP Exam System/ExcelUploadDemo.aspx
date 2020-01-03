@@ -8,7 +8,7 @@
       <div class="modal-dialog" role="document" style="width:600px">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title"><b>Upload File</b></h5>s
+                <h5 class="modal-title"><b>Upload File</b></h5>
             </div>
             <div class="modal-body">
                 <div class="panel-default">
@@ -20,15 +20,17 @@
                             <div class="col-lg-7">
                                 <input id="filepath" type="text"  class="form-control" title="---File Path---"/>
                             </div>
-                            <div class="col-lg-1"></div>
                             <div class="col-lg-2">
-                                <button id="openbtn" class="btn btn-success" style="margin-bottom:0px;width:70px" onclick="FileOpen()">Open</button>
+                                <button id="openbtn" type="button" class="btn btn-success" style="margin-bottom:0px;position:relative;overflow:hidden">
+                                    OpenFile
+                                </button>
+                                <input type="file" id="file-input"  onchange="handleFiles(this.files)" accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" style="position:absolute;left:0;right:0;top:0;bottom:0;z-index:10;height:100%;width:100%;opacity:0;"/> 
                             </div>
                         </div>
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive">
-                            <table class="table table-striped table-sm table-bordered table-hover" id="user-upload-table">
+                            <table class="table table-striped table-sm table-bordered table-hover" id="result"<%--id="user-upload-table"--%>>
                                 <thead>
                                     <tr>
                                         <th>Index</th>
@@ -54,4 +56,7 @@
     </div>
 
 <script src="Scripts/Customer/ExacelUpload.js"></script>
+<script src="Scripts/Customer/xlsx.full.min.js"></script>
+    <script>
+    </script>
 </asp:Content>

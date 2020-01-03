@@ -56,17 +56,18 @@
                         <li class="dropdown" style="overflow:visible">                            
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">Setting<b class="caret"></b></a>
                                 <ul class="dropdown-menu"> 
-                                    <li><a runat="server" href="~/SetExam.aspx">Exam Config</a></li>
-                                    <li><a runat="server" href="~/SetUser.aspx">Manage User</a></li>
-                                    <li><a runat="server" href="~/SetQuestion.aspx">Manage Question</a></li>
+                                    <li><a runat="server" href="~/SetExam">Exam Config</a></li>
+                                    <li><a runat="server" href="~/SetUser">Manage User</a></li>
+                                    <li><a runat="server" href="~/SetQuestion">Manage Question</a></li>
                                     <li role="presentation" class="divider"></li>
-                                    <li><a runat="server" href="~/SetDepartment.aspx">Department</a></li>
-                                    <li><a runat="server" href="~/SetProject.aspx">Project</a></li>
+                                    <li><a runat="server" href="~/SetDepartment">Department</a></li>
+                                    <li><a runat="server" href="~/SetProject">Project</a></li>
                                 </ul>
                         </li>
-                        <li><a runat="server" href="~/SearchScore.aspx">Search Score</a></li>
+                        <li><a runat="server" href="~/SearchScore">Search Score</a></li>
                         <li><a runat="server" href="~/ExtendedFile">ExtendedFile</a></li>
                         <li><a runat="server" href="~/Contact">Contact</a></li>
+                        <li><a runat="server" href="~/ExcelUploadDemo">Demo</a></li>
                     </ul>
                 </div>
             </div>
