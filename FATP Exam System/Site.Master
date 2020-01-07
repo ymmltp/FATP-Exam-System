@@ -6,7 +6,7 @@
 <head runat="server">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
     <title>FATP Exam System - <%: Page.Title %></title>
 
     <asp:PlaceHolder runat="server">
@@ -67,7 +67,6 @@
                         <li><a runat="server" href="~/SearchScore">Search Score</a></li>
                         <li><a runat="server" href="~/ExtendedFile">ExtendedFile</a></li>
                         <li><a runat="server" href="~/Contact">Contact</a></li>
-                        <li><a runat="server" href="~/ExcelUploadDemo">Demo</a></li>
                     </ul>
                 </div>
             </div>

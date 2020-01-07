@@ -25,7 +25,7 @@
                     <button id="Addbtn" class="btn btn-success" type="button" style="margin-bottom:0px;width:70px" onclick="Add_User()">Add</button>
                 </div>
                 <div class="col-lg-1">
-                    <button id="Uploadbtn" class="btn btn-info" type="button" style="margin-bottom:0px;width:70px" onclick="Upload_User()">Upload</button>
+                    <button id="showmodel" class="btn btn-info" type="button" style="margin-bottom:0px;width:70px">Upload</button>
                 </div>
                 <div class="col-lg-1">
                     <button id="Searchbtn" class="btn btn-primary" type="button" style="margin-bottom:0px;width:70px" onclick="Search_User()">Search</button>
@@ -91,10 +91,62 @@
       </div>
     </div>
 
-<%--upload model--%>
+ <%--upload model--%>
+    <div class="modal fade" id="UploadModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+      <div class="modal-dialog" role="document" style="width:600px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><b>Upload File</b></h5>
+            </div>
+            <div class="modal-body">
+                <div class="panel-default">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-lg-2">
+                                <label for="filepath" class="form-label text-right">Sheets:</label>
+                            </div>
+                            <div class="col-lg-7">
+                                <select id="sheetsele" class="form-control selectpicker" title="---Select Sheet---" onchange="ShowUserSheet()"></select>
+                            </div>
+                            <div class="col-lg-2">
+                                <button id="openbtn" type="button" class="btn btn-success" style="margin-bottom:0px;position:relative;overflow:hidden">
+                                    OpenFile
+                                </button>
+                                <input type="file" id="file-input"  onchange="handleFiles(this.files)" accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" style="position:absolute;left:0;right:0;top:0;bottom:0;z-index:10;height:100%;width:100%;opacity:0;"/> 
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-sm table-bordered table-hover" id="result">
+                                <thead>
+                                    <tr>
+                                        <th>ExamName</th>
+                                        <th>NTID</th>
+                                        <th>Department</th>
+                                        <th>Project</th>
+                                        <th>UserLevel</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="user-upload-table-tr"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" id="upload" onclick="UploadUser()">Upload</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
     <script src="Scripts/bootstrap-select.min.js"></script>
     <script src="Scripts/Customer/SettingJS.js"></script>
+    <script src="Scripts/Customer/ExcelUpload.js"></script>
+    <script src="Scripts/Customer/xlsx.full.min.js"></script>
     <script>
         $(document).ready(function () {
             Select_Department();

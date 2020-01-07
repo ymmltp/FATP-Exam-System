@@ -375,7 +375,6 @@ function Save_Exam(examtype) {
     var singlescore = $("#singlescore-input").val();
     var multiplecount = $("#multiplecount-input").val();
     var multiplescore = $("#multiplescore-input").val();
-
     var url = encodeURI("Ashx/Update.ashx?type=exam&examtype=" + examtype + "&examname=" + examname + "&totalscore=" + totalscore + "&passscore=" + passscore + "&singlescore=" + singlescore + "&singlecount=" + singlecount + "&multiplecount=" + multiplecount + "&multiplescore=" + multiplescore + "&RandID=" + Math.random());
     $.getJSON(url, function (data) {
         alert(data);
@@ -392,7 +391,7 @@ function Edit_User(object) {
     var userlevel = $("#user-table tr:eq(" + rrow + ") td:eq(6)").html();
     var exantype = "";
 
-    var url = "Ashx/GetTable.ashx?type=exam&examname=" + examname + "&RandID=" + Math.random();
+    var url = "Ashx/GetTable.ashx?type=ByexamName&examname=" + examname + "&RandID=" + Math.random();
     $.ajax({
         url: url,
         type:"GET",
@@ -460,7 +459,7 @@ function Edit_Question(object) {
     var s3 = $("#question-table tr:eq(" + rrow + ") td:eq(7)").html();
     var s4 = $("#question-table tr:eq(" + rrow + ") td:eq(8)").html();
     var answer = $("#question-table tr:eq(" + rrow + ") td:eq(9)").html().split(",");
-    var url = "Ashx/GetTable.ashx?type=exam&examname=" + examname + "&RandID=" + Math.random();
+    var url = "Ashx/GetTable.ashx?type=ByexamName&examname=" + examname + "&RandID=" + Math.random();
     $.ajax({
         url: url,
         type: "GET",

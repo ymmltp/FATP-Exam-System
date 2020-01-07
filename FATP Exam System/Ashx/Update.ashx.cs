@@ -15,9 +15,9 @@ namespace FATP_Exam_System.Ashx
         {
             context.Response.ContentType = "text/plain";
             string type = context.Request.QueryString["type"];
-            string ntid = HttpContext.Current.Session["NTID"].ToString();
+            string ntid = context.Request.QueryString["ntid"];
             string role = context.Request.QueryString["role"];
-            string examtype = HttpContext.Current.Session["ExamType"].ToString();
+            string examtype = context.Request.QueryString["ExamType"];
             string userID = context.Request.QueryString["userID"];
             string questionID = context.Request.QueryString["questionID"];
             string department = context.Request.QueryString["department"];
@@ -39,6 +39,15 @@ namespace FATP_Exam_System.Ashx
             string answer = context.Request.QueryString["answer"];
             string json = "";
             string callback = "";
+
+            if (string.IsNullOrEmpty(ntid))
+            {
+                ntid= HttpContext.Current.Session["NTID"].ToString();
+            }
+            if (string.IsNullOrEmpty(examtype))
+            {
+                examtype = HttpContext.Current.Session["ExamType"].ToString();
+            }
 
             switch (type)
             {

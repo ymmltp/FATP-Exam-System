@@ -84,6 +84,10 @@ namespace BLL
         {
             return _myinfo.GetUser_Table(ExamType, Project, Department, NTID);
         }
+        public static string Batch_Upload_User(DataTable dt)
+        {
+            return _myinfo.Batch_Upload_User(dt);
+        }
         public static string Add_User(string examType, string NTID, string Project, string Department, string UserLevel)
         {
             return _myinfo.Add_User(examType, NTID, Project, Department, UserLevel);
@@ -102,6 +106,10 @@ namespace BLL
         public static DataTable GetQuestion_Table(string ExamType=null, string QuestionType=null)
         {
             return _myinfo.GetQuestion_Table(ExamType, QuestionType);
+        }
+        public static string Batch_Upload_Question(DataTable dt)
+        {
+            return _myinfo.Batch_Upload_Question(dt);
         }
         public static string Add_Question(string ExamType, string question, string questionType, string s1, string s2,string answer, string s3=null, string s4=null)
         {

@@ -54,6 +54,9 @@ namespace FATP_Exam_System.Ashx
                 case "department":
                     dt = BLL.GetData.GetDepartment_Table(department);
                     break;
+                case "ByexamName":
+                    dt = BLL.GetData.GetExamConfig_Table(examname);
+                    break;
                 case "exam":
                     dt = BLL.GetData.GetExamConfig_by_ExamType(examtype);
                     break;

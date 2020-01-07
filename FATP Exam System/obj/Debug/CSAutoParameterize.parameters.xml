@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="mydatabase-Web.config Connection String" description="mydatabase Connection String used in web.config by the application to access the database." defaultValue="Server=cnwuxg0te01;SslMode=none;Database=exam_system;Uid=root;Pwd=Jabil12345;Allow User Variables=True;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\1382919\\source\\repos\\FATP\ Exam\ System\\FATP\ Exam\ System\\obj\\Debug\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='mydatabase']/@connectionString" />
+  </parameter>
+</parameters>

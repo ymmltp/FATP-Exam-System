@@ -137,9 +137,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\examformat.css" />
-    <Content Include="ExcelUploadDemo.aspx" />
     <Content Include="PersonalScore.aspx" />
-    <Content Include="Scripts\Customer\ExacelUpload.js" />
+    <Content Include="Scripts\Customer\ExcelUpload.js" />
     <Content Include="Scripts\Customer\Exam.js" />
     <Content Include="Scripts\Customer\getScore.js" />
     <Content Include="Scripts\Customer\xlsx.full.min.js" />
@@ -184,6 +183,8 @@
     <Content Include="excelModel\UserModel.xlsx" />
     <Content Include="Ashx\Exam.ashx" />
     <Content Include="Ashx\ScoreSearch.ashx" />
+    <Content Include="Ashx\BatchUpload.ashx" />
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="images\Green Point_WhiteHorzontal.png" />
     <Content Include="images\jabil.png" />
@@ -239,18 +240,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="Ashx\BatchUpload.ashx.cs">
+      <DependentUpon>BatchUpload.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Ashx\Exam.ashx.cs">
       <DependentUpon>Exam.ashx</DependentUpon>
     </Compile>
     <Compile Include="Ashx\ScoreSearch.ashx.cs">
       <DependentUpon>ScoreSearch.ashx</DependentUpon>
-    </Compile>
-    <Compile Include="ExcelUploadDemo.aspx.cs">
-      <DependentUpon>ExcelUploadDemo.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ExcelUploadDemo.aspx.designer.cs">
-      <DependentUpon>ExcelUploadDemo.aspx</DependentUpon>
     </Compile>
     <Compile Include="ExtendedFile.aspx.cs">
       <DependentUpon>ExtendedFile.aspx</DependentUpon>

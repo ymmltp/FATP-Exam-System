@@ -222,6 +222,19 @@ namespace DAL
             DataTable dt = sp.Query(sql);
             return dt;
         }
+        public string Batch_Upload_User(DataTable dt)
+        {
+            string mesg = "Add User success!";
+            try
+            {
+                dt.TableName = "userlist";
+                mesg +=" Insert "+ sp.MySQLBulkLoader(dt);
+            }
+            catch (Exception e){
+                mesg = "Add User fail!\n" + e.Message;
+            }
+            return mesg;
+        }
         public string Add_User(string examType, string NTID, string Project, string Department,string UserLevel)
         {
             string mesg = "Add User success!";
@@ -282,6 +295,20 @@ namespace DAL
             sql+= " ORDER BY ExamType) D,(SELECT @i:= 0) as A  ";
             DataTable dt = sp.Query(sql);
             return dt;
+        }
+        public string Batch_Upload_Question(DataTable dt)
+        {
+            string mesg = "Add Question success!";
+            try
+            {
+                dt.TableName = "questionlist";
+                mesg += "Insert " + sp.MySQLBulkLoader(dt);
+            }
+            catch (Exception e)
+            {
+                mesg = "Add Question fail!\n" + e.Message;
+            }
+            return mesg;
         }
         public string Add_Question(string ExamType, string question, string questionType, string s1, string s2, string answer,string s3, string s4) 
         {
