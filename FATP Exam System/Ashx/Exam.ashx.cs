@@ -17,9 +17,9 @@ namespace FATP_Exam_System.Ashx
         public void ProcessRequest(HttpContext context)
         {
             context.Response.ContentType = "text/plain";
-            string type = context.Request.QueryString["type"];
+            string type = HttpContext.Current.Request["type"];
             string examtype = HttpContext.Current.Session["ExamType"].ToString();
-            string ql = context.Request.QueryString["qlist"];
+            string ql = HttpContext.Current.Request["qlist"];
             List<QuestionInfo> qlist = new List<QuestionInfo>();
             if (!String.IsNullOrEmpty(ql))
             {
@@ -35,7 +35,6 @@ namespace FATP_Exam_System.Ashx
             Dictionary<int, List<QuestionInfo>> finalresult = new Dictionary<int, List<QuestionInfo>>();
             List<QuestionInfo> callbackql = new List<QuestionInfo>();
             ExamInfo examinfo = new ExamInfo();
-            int finalscore = 0;
 
             switch (type) {
                 case "getexaminfo":
@@ -45,11 +44,6 @@ namespace FATP_Exam_System.Ashx
                 case "getquestioninfo":
                     callbackql = BLL.Exam.Get_Question(examtype);
                     json = Newtonsoft.Json.JsonConvert.SerializeObject(callbackql);
-                    break;
-                case "getresult":
-                    BLL.Exam.Final_Result_Check(qlist, out callbackql, out finalscore);
-                    finalresult.Add(finalscore, callbackql);
-                    json = Newtonsoft.Json.JsonConvert.SerializeObject(finalresult);
                     break;
                 default:
                     json = "Sorry,don't have such function...Please check your url";

@@ -1,9 +1,9 @@
 ﻿var examinfo;
 var qlist;
-var currentQuestionIndex=0;
+var currentQuestionIndex = 0;
+var currentQuestionOption;
 var currentQuestion;
 var finalscore = 0;
-var finalqlist;
 
 function Get_ExamInfo() {
     var url = "Ashx/Exam.ashx?type=getexaminfo&RandID=" + Math.random();
@@ -15,7 +15,7 @@ function Get_ExamInfo() {
         dataType: "json",
         async: false,
         success: function (data) {
-            if (data.ExamID != 0) {
+            if (data.ExamID !== 0) {
                 examinfo = data;
                 var singlecount = data.SingleCount;
                 var multiplecount = data.MultipleCount;
@@ -52,7 +52,7 @@ function Get_Question() {
         dataType: "json",
         async: false,
         success: function (data) {
-            if (data.ExamID != 0) {
+            if (data.ExamID !== 0) {
                 qlist = data;
             }
         },
@@ -64,88 +64,88 @@ function Get_Question() {
 
 function Question_Select(object) {
     if (object) {
-        Save_Answer(currentQuestionIndex);
+        Save_Answer(currentQuestionOption, currentQuestionIndex);
         var index = object.getAttribute("data");
         currentQuestionIndex = index;
+        currentQuestionOption = object;
         currentQuestion = qlist[index - 1];
-        object.setAttribute("class", "question-list-item done")
         var qc = index + '、' + currentQuestion.Question;
         var qt = currentQuestion.QuestionType;
         var sl = "";
         if (qt === "Single") {
-            if (currentQuestion.S1.length != 0) {
-                sl += '<li class="select-list-item"><input type="radio" id="s1" value="A" name="Q' + index + '"';
+            if (currentQuestion.S1.length !== 0) {
+                sl += '<li class="select-list-item row"><input type="radio" id="s1" value="A" name="Q' + index + '"';
                 if (currentQuestion.UserAnswer) {
                     if (currentQuestion.UserAnswer.indexOf('A') >= 0) {
                         sl += 'checked=true ';
                     }
                 }
-                sl += '/> <label for="s1">' + currentQuestion.S1 + '</label></li>';
+                sl += ' style="margin-left:-1em; margin-right:-2em;" class="col-xs-1"/> <label for="s1" class="col-xs-11">' + currentQuestion.S1 + '</label></li>';
             }
-            if (currentQuestion.S2.length != 0) {
-                sl += '<li class="select-list-item"><input type="radio" id="s2" value="B" name="Q' + index + '"';
+            if (currentQuestion.S2.length !== 0) {
+                sl += '<li class="select-list-item row"><input type="radio" id="s2" value="B" name="Q' + index + '"';
                 if (currentQuestion.UserAnswer) {
                     if (currentQuestion.UserAnswer.indexOf('B') >= 0) {
                         sl += 'checked=true ';
                     }
                 }
-                sl += '/> <label for="s2">' + currentQuestion.S2 + '</label></li>';
+                sl += ' style="margin-left:-1em; margin-right:-2em;" class="col-xs-1"/> <label for="s2" class="col-xs-11">' + currentQuestion.S2 + '</label></li>';
             }
-            if (currentQuestion.S3.length != 0) {
-                sl += '<li class="select-list-item"><input type="radio" id="s3" value="C" name="Q' + index + '"';
+            if (currentQuestion.S3.length !== 0) {
+                sl += '<li class="select-list-item row"><input type="radio" id="s3" value="C" name="Q' + index + '"';
                 if (currentQuestion.UserAnswer) {
                     if (currentQuestion.UserAnswer.indexOf('C') >= 0) {
                         sl += 'checked=true ';
                     }
                 }
-                sl += '/> <label for="s3">' + currentQuestion.S3 + '</label></li>';
+                sl += ' style="margin-left:-1em; margin-right:-2em;" class="col-xs-1"/> <label for="s3" class="col-xs-11">' + currentQuestion.S3 + '</label></li>';
             }
-            if (currentQuestion.S4.length != 0) {
-                sl += '<li class="select-list-item"><input type="radio" id="s4" value="D" name="Q' + index + '"';
+            if (currentQuestion.S4.length !== 0) {
+                sl += '<li class="select-list-item row"><input type="radio" id="s4" value="D" name="Q' + index + '"';
                 if (currentQuestion.UserAnswer) {
                     if (currentQuestion.UserAnswer.indexOf('D') >= 0) {
                         sl += 'checked=true ';
                     }
                 }
-                sl += '/> <label for="s4">' + currentQuestion.S4 + '</label></li> ';
+                sl += ' style="margin-left:-1em; margin-right:-2em;" class="col-xs-1"/> <label for="s4" class="col-xs-11">' + currentQuestion.S4 + '</label></li> ';
             }
         }
         else if (qt === "Multiple") {
-            if (currentQuestion.S1.length != 0) {
-                sl += '<li class="select-list-item"><input type="checkbox" id="s1" value="A" name="Q' + index + '"';
+            if (currentQuestion.S1.length !== 0) {
+                sl += '<li class="select-list-item row"><input type="checkbox" id="s1" value="A" name="Q' + index + '"';
                 if (currentQuestion.UserAnswer) {
                     if (currentQuestion.UserAnswer.indexOf('A') >= 0) {
                         sl += 'checked=true ';
                     }
                 }
-                sl += '/> <label for="s1">' + currentQuestion.S1 + '</label ></li > ';
+                sl += ' style="margin-left:-1em; margin-right:-2em;" class="col-xs-1"/> <label for="s1" class="col-xs-11">' + currentQuestion.S1 + '</label ></li > ';
             }
-            if (currentQuestion.S2.length != 0) {
-                sl += '<li class="select-list-item"><input type="checkbox" id="s2" value="B" name="Q' + index + '"';
+            if (currentQuestion.S2.length !== 0) {
+                sl += '<li class="select-list-item row"><input type="checkbox" id="s2" value="B" name="Q' + index + '"';
                 if (currentQuestion.UserAnswer) {
                     if (currentQuestion.UserAnswer.indexOf('B') >= 0) {
                         sl += 'checked=true ';
                     }
                 }
-                sl += '/> <label for="s2">' + currentQuestion.S2 + '</label ></li> ';
+                sl += ' style="margin-left:-1em; margin-right:-2em;" class="col-xs-1"/> <label for="s2" class="col-xs-11">' + currentQuestion.S2 + '</label ></li> ';
             }
-            if (currentQuestion.S3.length != 0) {
-                sl += '<li class="select-list-item"><input type="checkbox" id="s3" value="C" name="Q' + index + '"';
+            if (currentQuestion.S3.length !== 0) {
+                sl += '<li class="select-list-item row"><input type="checkbox" id="s3" value="C" name="Q' + index + '"';
                 if (currentQuestion.UserAnswer) {
                     if (currentQuestion.UserAnswer.indexOf('C') >= 0) {
                         sl += 'checked=true ';
                     }
                 }
-                sl += '/> <label for="s3">' + currentQuestion.S3 + '</label ></li> ';
+                sl += ' style="margin-left:-1em; margin-right:-2em;" class="col-xs-1"/> <label for="s3" class="col-xs-11">' + currentQuestion.S3 + '</label ></li> ';
             }
-            if (currentQuestion.S4.length != 0) {
-                sl += '<li class="select-list-item"><input type="checkbox" id="s4" value="D" name="Q' + index + '"';
+            if (currentQuestion.S4.length !== 0) {
+                sl += '<li class="select-list-item row"><input type="checkbox" id="s4" value="D" name="Q' + index + '"';
                 if (currentQuestion.UserAnswer) {
                     if (currentQuestion.UserAnswer.indexOf('D') >= 0) {
                         sl += 'checked=true ';
                     }
                 }
-                sl += '/> <label for="s4">' + currentQuestion.S4 + '</label ></li > ';
+                sl += ' style="margin-left:-1em; margin-right:-2em;" class="col-xs-1"/> <label for="s4" class="col-xs-11">' + currentQuestion.S4 + '</label ></li > ';
             }
         }
         $("#select-list").html("");
@@ -153,21 +153,28 @@ function Question_Select(object) {
         $("#question-content").html("");
         $("#question-content").html('<p>' + qc + '</p>');
         Is_Last_Question(currentQuestionIndex);
-        //$("#question-type").html("");
-        //$("#question-type").html('<b>' + qt + '</b>');
     }
     else {
         alert("Question Index error...")
     }
 }
 //保存当前问题的答案
-function Save_Answer(currentindex) {
+function Save_Answer(object,currentindex) {
     if (currentQuestion) {
+        var flag = false;  //有无被选
         var Gbox = document.getElementsByName("Q" + currentindex);
         var answer = new Array();
         for (var i = 0; i < Gbox.length; i++) {
-            if(Gbox[i].checked===true)
+            if (Gbox[i].checked === true) {
+                flag = true;
                 answer.push(Gbox[i].value);
+            }
+        }
+        if (flag === true) {
+            object.setAttribute("class", "question-list-item done")
+        }
+        else {
+            object.setAttribute("class", "question-list-item undo")
         }
         currentQuestion.UserAnswer = answer;
     }
@@ -190,7 +197,7 @@ $("#btn-next").click(function () {
     Question_Select(obj);
 });
 $("#btn-submit").click(function () {
-    Save_Answer(currentQuestionIndex);
+    Save_Answer(currentQuestionOption,currentQuestionIndex);
     if (Is_All_Done()) {
         Submit_Answer();
     }
@@ -201,152 +208,159 @@ $("#btn-submit").click(function () {
 $("#SureBut").click(function () {
     try {
         $("#SubmitModal").modal("hide");
+        Calculate_Score();
         Submit_Answer();
     } catch (e) {
         alert(e);
     }
 })
 
-//提交答案
+//计算得分
+function Calculate_Score() {
+    var singlescore = examinfo.SingleScore;
+    var multiplescore = examinfo.MultipleScore;
+    for (var a in qlist) {
+        if (JSON.stringify(qlist[a].Answer) === JSON.stringify(qlist[a].UserAnswer)) {
+            qlist[a].FinalResult = true;
+            if (qlist[a].QuestionType === "Single") {
+                finalscore += parseInt(singlescore);
+            } else if (qlist[a].QuestionType === "Multiple") {
+                finalscore += parseInt(multiplescore);
+            }
+        }
+        else {
+            qlist[a].FinalResult = false;
+        }
+    }
+}
+//提交答案(只提交分数)
 function Submit_Answer() {
-    var questionlist = JSON.stringify(qlist);
-    var url = encodeURI("Ashx/Exam.ashx?type=getresult&qlist=" + questionlist + "&RandID=" + Math.random());
+    var questionlist = "";
+    var questioncontent = "";
+    if (finalscore >= examinfo.PassScore) {
+        questioncontent += '<p style="color:green;font-size:20px;">Congratuation!</p>';
+    }
+    else {
+        questioncontent += '<p>Sorry,the PassScore is <span style="color:green;">' + examinfo.PassScore + '</span>, you got <span style="color:red;">' + finalscore + '</span></p>';
+        questioncontent += '<p>You can check your answer.</p>';
+    }
+    for (var i = 0; i < qlist.length; i++) {
+        if (qlist[i].FinalResult === true) {
+            questionlist += '<li class="col-lg-3 my-col"><button class="question-list-item done" data="' + (i + 1).toString() + '" type="button" id="Q' + (i + 1).toString() + '" onclick="Check_Answer(this)">' + (i + 1).toString() + '</button></li>';
+        }
+        else {
+            questionlist += '<li class="col-lg-3 my-col"><button class="question-list-item do-error" data="' + (i + 1).toString() + '" type="button" id="Q' + (i + 1).toString() + '" onclick="Check_Answer(this)">' + (i + 1).toString() + '</button></li>';
+        }
+    }
+
     $.ajax({
-        url: url,
-        type: "Get",
+        url: "Ashx/Update.ashx",
+        type: "post",
+        contentType: "application/x-www-form-urlencoded;charset=utf-8",
+        data: {
+            type:"score",
+            score:finalscore,
+        },
         dataType: "json",
         success: function (data) {
-            for (var key in data) {
-                finalscore = key;
-                finalqlist = data[key];
-                var questionlist = "";
-                var questioncontent = "";
-                if (finalscore >= examinfo.PassScore) {
-                    questioncontent += '<p style="color:green;font-size:20px;">Congratuation!</p>';
-                }
-                else {
-                    questioncontent += '<p>Sorry,the PassScore is <span style="color:green;">' + examinfo.PassScore + '</span>, you got <span style="color:red;">' + finalscore + '</span></p>';
-                    questioncontent += '<p>You can check your answer.</p>';
-                }
-                for (var i = 0; i < finalqlist.length; i++) {
-                    if (finalqlist[i].FinalResult === true) {
-                        questionlist += '<li class="col-lg-3 my-col"><button class="question-list-item done" data="' + (i + 1).toString() + '" type="button" id="Q' + (i + 1).toString() + '" onclick="Check_Answer(this)">' + (i + 1).toString() + '</button></li>';
-                    }
-                    else {
-                        questionlist += '<li class="col-lg-3 my-col"><button class="question-list-item do-error" data="' + (i + 1).toString() + '" type="button" id="Q' + (i + 1).toString() + '" onclick="Check_Answer(this)">' + (i + 1).toString() + '</button></li>';
-                    }
-                }
-                $("#question-list").html("");
-                $("#question-content").html("");
-                $("#select-list").html("");
-                $("#question-list").html(questionlist);
-                $("#question-content").html(questioncontent);
-                $("#exam-score").html("<b>FinalScore: " + finalscore+"</b>");
-                $(".exam-function").attr("style", "display:none");
-
-                var url1 = encodeURI("Ashx/Update.ashx?type=score&score=" + finalscore + "&RandID=" + Math.random());
-                $.ajax({
-                    url: url1,
-                    type: "Get",
-                    dataType: "json",
-                    success: function (data) { },
-                    error: function (data) { alert(data.responseText); },
-                });
-            }
+            $("#question-list").html("");
+            $("#question-content").html("");
+            $("#select-list").html("");
+            $("#question-list").html(questionlist);
+            $("#question-content").html(questioncontent);
+            $("#exam-score").html("<b>FinalScore: " + finalscore + "</b>");
+            $(".exam-function").attr("style", "display:none");
         },
-        error: function (data) {
-            alert(data.responseText)
-        }, 
-    })
+        error: function (data) { alert(data.responseText); },
+    });
 }
+
 //检查结果
 function Check_Answer(object) {
     var index = object.getAttribute("data");
     currentQuestionIndex = index;
-    currentQuestion = finalqlist[index - 1];
+    currentQuestion = qlist[index - 1];
     var answertips = "Correct answer is "+ currentQuestion.Answer;
     var qc = index + '、' + currentQuestion.Question;
     var qt = currentQuestion.QuestionType;
     var sl = "";
     if (qt === "Single") {
         if (currentQuestion.S1.length != 0) {
-            sl += '<li class="select-list-item"><input type="radio" id="s1" value="A" name="Q' + index + '"';
+            sl += '<li class="select-list-item row"><input type="radio" id="s1" value="A" name="Q' + index + '"';
             if (currentQuestion.UserAnswer) {
                 if (currentQuestion.UserAnswer.indexOf('A') >= 0) {
                     sl += 'checked=true ';
                 }
             }
-            sl += '/> <label for="s1">' + currentQuestion.S1 + '</label></li>';
+            sl += ' style="margin-left:-1em; margin-right:-2em;" class="col-xs-1"/> <label for="s1" class="col-xs-11">' + currentQuestion.S1 + '</label></li>';
         }
         if (currentQuestion.S2.length != 0) {
-            sl += '<li class="select-list-item"><input type="radio" id="s2" value="B" name="Q' + index + '"';
+            sl += '<li class="select-list-item row"><input type="radio" id="s2" value="B" name="Q' + index + '"';
             if (currentQuestion.UserAnswer) {
                 if (currentQuestion.UserAnswer.indexOf('B') >= 0) {
                     sl += 'checked=true ';
                 }
             }
-            sl += '/> <label for="s2">' + currentQuestion.S2 + '</label></li>';
+            sl += ' style="margin-left:-1em; margin-right:-2em;" class="col-xs-1"/> <label for="s2" class="col-xs-11">' + currentQuestion.S2 + '</label></li>';
         }
         if (currentQuestion.S3.length != 0) {
-            sl += '<li class="select-list-item"><input type="radio" id="s3" value="C" name="Q' + index + '"';
+            sl += '<li class="select-list-item row"><input type="radio" id="s3" value="C" name="Q' + index + '"';
             if (currentQuestion.UserAnswer) {
                 if (currentQuestion.UserAnswer.indexOf('C') >= 0) {
                     sl += 'checked=true ';
                 }
             }
-            sl += '/> <label for="s3">' + currentQuestion.S3 + '</label></li>';
+            sl += ' style="margin-left:-1em; margin-right:-2em;" class="col-xs-1"/> <label for="s3" class="col-xs-11">' + currentQuestion.S3 + '</label></li>';
         }
         if (currentQuestion.S4.length != 0) {
-            sl += '<li class="select-list-item"><input type="radio" id="s4" value="D" name="Q' + index + '"';
+            sl += '<li class="select-list-item row"><input type="radio" id="s4" value="D" name="Q' + index + '"';
             if (currentQuestion.UserAnswer) {
                 if (currentQuestion.UserAnswer.indexOf('D') >= 0) {
                     sl += 'checked=true ';
                 }
             }
-            sl += '/> <label for="s4">' + currentQuestion.S4 + '</label></li> ';
+            sl += ' style="margin-left:-1em; margin-right:-2em;" class="col-xs-1"/> <label for="s4" class="col-xs-11">' + currentQuestion.S4 + '</label></li> ';
         }
-        sl += '<li class="select-list-item"> Correct Answer：' + currentQuestion.Answer.toString() + '</li>';
-        sl += '<li class="select-list-item"> Your Answer：' + currentQuestion.UserAnswer.toString() + '</li>';
+        sl += '<li class="select-list-item row" style="font-weight:800;">&nbsp&nbsp&nbspCorrect Answer：<span style="color:blue;font-weight:800;">' + currentQuestion.Answer.toString() + '</span></li>';
     }
     else if (qt === "Multiple") {
         if (currentQuestion.S1.length != 0) {
-            sl += '<li class="select-list-item"><input type="checkbox" id="s1" value="A" name="Q' + index + '"';
+            sl += '<li class="select-list-item row"><input type="checkbox" id="s1" value="A" name="Q' + index + '"';
             if (currentQuestion.UserAnswer) {
                 if (currentQuestion.UserAnswer.indexOf('A') >= 0) {
                     sl += 'checked=true ';
                 }
             }
-            sl += '/> <label for="s1">' + currentQuestion.S1 + '</label ></li > ';
+            sl += ' style="margin-left:-1em; margin-right:-2em;" class="col-xs-1"/> <label for="s1" class="col-xs-11">' + currentQuestion.S1 + '</label ></li > ';
         }
         if (currentQuestion.S2.length != 0) {
-            sl += '<li class="select-list-item"><input type="checkbox" id="s2" value="B" name="Q' + index + '"';
+            sl += '<li class="select-list-item row"><input type="checkbox" id="s2" value="B" name="Q' + index + '"';
             if (currentQuestion.UserAnswer) {
                 if (currentQuestion.UserAnswer.indexOf('B') >= 0) {
                     sl += 'checked=true ';
                 }
             }
-            sl += '/> <label for="s2">' + currentQuestion.S2 + '</label ></li> ';
+            sl += ' style="margin-left:-1em; margin-right:-2em;" class="col-xs-1"/> <label for="s2" class="col-xs-11">' + currentQuestion.S2 + '</label ></li> ';
         }
         if (currentQuestion.S3.length != 0) {
-            sl += '<li class="select-list-item"><input type="checkbox" id="s3" value="C" name="Q' + index + '"';
+            sl += '<li class="select-list-item row"><input type="checkbox" id="s3" value="C" name="Q' + index + '"';
             if (currentQuestion.UserAnswer) {
                 if (currentQuestion.UserAnswer.indexOf('C') >= 0) {
                     sl += 'checked=true ';
                 }
             }
-            sl += '/> <label for="s3">' + currentQuestion.S3 + '</label ></li> ';
+            sl += ' style="margin-left:-1em; margin-right:-2em;" class="col-xs-1"/> <label for="s3" class="col-xs-11">' + currentQuestion.S3 + '</label ></li> ';
         }
         if (currentQuestion.S4.length != 0) {
-            sl += '<li class="select-list-item"><input type="checkbox" id="s4" value="D" name="Q' + index + '"';
+            sl += '<li class="select-list-item row"><input type="checkbox" id="s4" value="D" name="Q' + index + '"';
             if (currentQuestion.UserAnswer) {
                 if (currentQuestion.UserAnswer.indexOf('D') >= 0) {
                     sl += 'checked=true ';
                 }
             }
-            sl += '/> <label for="s4">' + currentQuestion.S4 + '</label ></li > ';
+            sl += ' style="margin-left:-1em; margin-right:-2em;" class="col-xs-1"/> <label for="s4" class="col-xs-11">' + currentQuestion.S4 + '</label ></li > ';
         }
-        sl += '<li class="select-list-item"> Correct Answer：' + currentQuestion.Answer.toString() + '</li>';
-        sl += '<li class="select-list-item"> Your Answer：' + currentQuestion.UserAnswer.toString() + '</li>';
+        sl += '<li class="select-list-item row" style="font-weight:800;">&nbsp&nbsp&nbspCorrect Answer：<span style="color:blue;font-weight:800;">' + currentQuestion.Answer.toString() + '</span></li>';
     }
     $("#select-list").html("");
     $("#select-list").html(sl);

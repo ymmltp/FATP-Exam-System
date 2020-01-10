@@ -40,17 +40,16 @@
     padding-left:5px;
 }
 .select-list-item {
-    position: relative;
-    height: 40px;
+    /*position: relative;*/
+    padding-top:3px;
+    padding-bottom:3px;
     font-size: 14px;
-    font-weight: 400;
-    /*color: #696969;*/
+    font-weight: 300;
 }
 .exam-function {
     position: relative;
     margin-top: 2px;
     height: 10%;
-    /*background-color: aquamarine;*/
     text-align:center;
 }
 

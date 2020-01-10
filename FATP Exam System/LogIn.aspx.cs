@@ -60,15 +60,29 @@ namespace FATP_Exam_System
             password = TextBox2.Text;
             userType = SeleUser.SelectedItem.Value;
             examType = SeleExam.SelectedItem.Value;
-            if (ntid == "User001" && password == "123456")
+            if (ntid == "User001")
             {
-                Session["NTID"] = "User001";
-                Session["UserName"] = "User001";
-                Session["ExamType"] = examType;
-                Session["Power"] = (int)(UserGroupEnum)(Enum.Parse(typeof(UserGroupEnum), "User"));
-                Session["Project"] = "null";
-                Session["Department"] = "null";
-                Response.Redirect("Default.aspx");
+                if (password == "123456")
+                {
+                    if (examType == "0")
+                    {
+                        lexamtype.Visible = true;
+                    }
+                    else
+                    {
+                        Session["NTID"] = "User001";
+                        Session["UserName"] = "User001";
+                        Session["ExamType"] = examType;
+                        Session["Power"] = (int)(UserGroupEnum)(Enum.Parse(typeof(UserGroupEnum), "User"));
+                        Session["Project"] = "null";
+                        Session["Department"] = "null";
+                        Response.Redirect("Default.aspx");
+                    }
+                }
+                else
+                {
+                    lpassword.Visible = true;
+                }
             }
             else {
                 if (Auth(ntid, password))

@@ -106,14 +106,40 @@ function ShowQuestionSheet() {
 }
 
 function UploadUser() {
-    var url = encodeURI("Ashx/BatchUpload.ashx?type=user&uploadArray=" + JSON.stringify(uploadArray) + "&RandID=" + Math.random());
-    $.getJSON(url,function (data) {
-        alert(data);
+    $.ajax({
+        url: "Ashx/BatchUpload.ashx",
+        type: "post",
+        contentType: "application/x-www-form-urlencoded;charset=utf-8",
+        data: {
+            type: "user",
+            uploadArray: JSON.stringify(uploadArray),
+            RandID: Math.random()
+        },
+        dataType: "json",
+        success: function (data) {
+            alert(data);
+        },
+        error: function (data) {
+            alert(data.responseText);
+        }
     })
 }
 function UploadQuestion() {
-    var url = encodeURI("Ashx/BatchUpload.ashx?type=question&uploadArray=" + JSON.stringify(uploadArray) + "&RandID=" + Math.random());
-    $.getJSON(url,function (data) {
-        alert(data);
+    $.ajax({
+        url: "Ashx/BatchUpload.ashx",
+        type: "post",
+        contentType: "application/x-www-form-urlencoded;charset=utf-8",
+        data: { 
+            type: "question",
+            uploadArray: JSON.stringify(uploadArray),
+            RandID: Math.random()
+        },
+        dataType: "json",
+        success: function (data) {
+            alert(data);
+        },
+        error: function (data) {
+            alert(data.responseText);
+        }
     })
 }

@@ -55,8 +55,8 @@ namespace DAL
                 throw new Exception("Please complete the exam information");
             }
             else {
-                int[] singleDB = ArrayRandom_Question(Convert.ToInt32(_examinfo.SingleCount), singledt.Rows.Count);
-                int[] multipleDB = ArrayRandom_Question(Convert.ToInt32(_examinfo.MultipleCount), multipledt.Rows.Count);
+                int[] singleDB = ArrayRandom_Question(Convert.ToInt32(_examinfo.SingleCount), 0, singledt.Rows.Count);
+                int[] multipleDB = ArrayRandom_Question(Convert.ToInt32(_examinfo.MultipleCount), 0, multipledt.Rows.Count);
                 for (int i = 0; i < singleDB.Length; i++)
                 {
                     QuestionInfo QInfo = new QuestionInfo();
@@ -90,61 +90,24 @@ namespace DAL
         }
 
         //从已知库中随机抽取题号
-        private int[] ArrayRandom_Question(int QCount,int TotalQCunt)
+        private int[] ArrayRandom_Question(int QCount,int MinIndex,int MaxIndex)
         {
             Random rd = new Random();
             int[] tmp = new int[QCount];
             for (int i = 0; i < QCount; i++)
             {
-                tmp[i] = rd.Next(0, TotalQCunt);
+                int currentRandom= rd.Next(MinIndex, MaxIndex);
+                bool flag = false; // 没有重复
+                foreach (int figure in tmp) {
+                    if (figure == currentRandom)
+                        flag = true;
+                }
+                if (flag)
+                    i = i - 1;
+                else
+                    tmp[i] = currentRandom;
             }
             return tmp;
-        }
-
-        //判断对错+最终成绩核算
-        public void Final_Result_Check(List<QuestionInfo> qlist, out List<QuestionInfo> finalqlist,out int finalScore)
-        {
-            List<QuestionInfo> tmp = qlist;
-            for (int i = 0; i < tmp.Count; i++)
-            {
-                if (compareArr(tmp[i].Answer,tmp[i].UserAnswer))
-                {
-                    tmp[i].FinalResult = true;
-                }
-                else {
-                    tmp[i].FinalResult = false;
-                }
-            }
-            finalScore = Final_Score(tmp);
-            finalqlist = tmp;
-        }
-        //比较数组是否一样
-        public static bool compareArr(string[] arr1, string[] arr2)
-        {
-            var q = from a in arr1 join b in arr2 on a equals b select a;
-            bool flag = arr1.Length == arr2.Length && q.Count() == arr1.Length;
-            return flag;//内容相同返回true,反之返回false。
-        }
-
-        //最终成绩核算
-        private int Final_Score(List<QuestionInfo> qlist)
-        {
-            List<QuestionInfo> tmp = qlist;
-            int finalScore = 0;
-            int singleScore = Convert.ToInt32(_examinfo.SingleScore);
-            int multipleScore = Convert.ToInt32(_examinfo.MultipleScore);
-            for (int i = 0; i < tmp.Count; i++)
-            {
-                if (tmp[i].QuestionType == "Single" && tmp[i].FinalResult)
-                {
-                    finalScore += singleScore;
-                }
-                else if (tmp[i].QuestionType == "Multiple" && tmp[i].FinalResult)
-                {
-                    finalScore += multipleScore;
-                }
-            }
-            return finalScore;
         }
     }
 }

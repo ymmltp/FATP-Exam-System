@@ -18,9 +18,5 @@ namespace BLL
         {
             return _myinfo.Get_Question(ExamType);
         }
-        public static void Final_Result_Check(List<QuestionInfo> qlist, out List<QuestionInfo> finalqlist, out int finalScore)
-        {
-            _myinfo.Final_Result_Check(qlist,out finalqlist,out finalScore);
-        }
     }
 }

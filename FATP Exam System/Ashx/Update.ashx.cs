@@ -14,7 +14,7 @@ namespace FATP_Exam_System.Ashx
         public void ProcessRequest(HttpContext context)
         {
             context.Response.ContentType = "text/plain";
-            string type = context.Request.QueryString["type"];
+            string type = HttpContext.Current.Request["type"];
             string ntid = context.Request.QueryString["ntid"];
             string role = context.Request.QueryString["role"];
             string examtype = context.Request.QueryString["ExamType"];
@@ -25,7 +25,7 @@ namespace FATP_Exam_System.Ashx
             string examname = context.Request.QueryString["examname"];
             string totalscore = context.Request.QueryString["totalscore"];
             string passscore = context.Request.QueryString["passscore"];
-            string score = context.Request.QueryString["score"];
+            string score = HttpContext.Current.Request["score"];
             string multiplescore = context.Request.QueryString["multiplescore"];
             string multiplecount = context.Request.QueryString["multiplecount"];
             string singlescore = context.Request.QueryString["singlescore"];

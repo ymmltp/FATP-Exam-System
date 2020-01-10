@@ -54,21 +54,34 @@ border-color:#008651;
     font-weight: 600;
     font-family: Arial;
     color: white;
-    position: absolute;
-    right: 20px;
+    position: relative;
+    display: block;
+    margin-right: 0px;
 }
 
 .navbar #log {
     color: white;
     font-weight: bold;
-    position: absolute;
-    margin-right: 20px;
-    right: 400px;
+    position: relative;
+    display:block;
+    margin-right: 3px;
 }
 
 .navbar #log:hover {
     color: #D3D3D3;
 }
+
+.navbar #out {
+    color: white;
+    font-size:10px;
+    position: relative;
+    display: block;
+    margin-right: 40px;
+}
+
+    .navbar #out:hover {
+        color: #D3D3D3;
+    }
 
 .navbar .navbar-header > a {
     color: white;

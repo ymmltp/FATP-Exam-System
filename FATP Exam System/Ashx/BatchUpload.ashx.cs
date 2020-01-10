@@ -20,8 +20,8 @@ namespace FATP_Exam_System.Ashx
         public void ProcessRequest(HttpContext context)
         {
             context.Response.ContentType = "text/plain";
-            string type = context.Request.QueryString["type"];
-            string UploadArray = context.Request.QueryString["uploadArray"];
+            string type = HttpContext.Current.Request["type"];
+            string UploadArray = HttpContext.Current.Request["uploadArray"];
             string json = "";
             DataTable dt = ToDataTable(UploadArray);
             string callback = "";
