@@ -126,10 +126,6 @@ namespace BLL
         #endregion
 
         #region examscore (select replace delete)
-        public static DataTable GetExamScore_Table(string examtype=null, string NTID = null)
-        {
-            return _myinfo.GetExamScore_Table(examtype, NTID);
-        }
         public static DataTable GetExamScore_Table(string examtype, string project, string department, string NTID)
         {
             return _myinfo.GetExamScore_Table(examtype, project, department, NTID);

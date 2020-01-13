@@ -187,7 +187,7 @@
     <script>
         $(document).ready(function () {
             Select_Exam();
-            Question_Table();
+            //Question_Table();
         })
     </script>
 

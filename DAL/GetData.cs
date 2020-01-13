@@ -278,7 +278,7 @@ namespace DAL
             return mesg;
         }
         #endregion
-
+        
         #region questionlist(select insert update delete)
         public DataTable GetQuestion_Table(string ExamType=null,string QuestionType=null)
         {
@@ -355,24 +355,9 @@ namespace DAL
         #endregion
 
         #region examscore (select replace delete)
-        public DataTable GetExamScore_Table(string examtype, string NTID)
-        {
-            string sql = "SELECT (@i:= @i+1) AS IndexID, B.* FROM examscore B,(SELECT @i:= 0) as A WHERE 1 ";
-            if (!string.IsNullOrEmpty(examtype))
-            {
-                sql += " AND B.ExamType='" + examtype + "'";
-            }
-            if (!string.IsNullOrEmpty(NTID))
-            {
-                sql += " AND B.NTID='" + NTID + "'";
-            }
-            sql += " ORDER by ExamType,ExamTime DESC";
-            DataTable dt = sp.Query(sql);
-            return dt;
-        }
         public DataTable GetExamScore_Table(string examtype, string project, string department, string NTID)
         {
-            string sql = @"SELECT (@i:=@i+1)as IndexID,D.ExamName,tmp.* from examconfig D INNER JOIN
+            string sql = @"SELECT (@i:=@i+1)as IndexID,D.ExamName,D.TotalScore,tmp.*,if(tmp.score<D.PassScore,'N','Y') AS IsPass from examconfig D INNER JOIN
                         (select  A.*,B.Project,B.Department from examscore A inner JOIN userlist B on A.NTID=B.NTID AND a.ExamType=b.ExamType WHERE 1 ";
             if (!string.IsNullOrEmpty(examtype))
             {

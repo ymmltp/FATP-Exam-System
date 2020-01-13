@@ -37,7 +37,7 @@
                     <label class="form-label text-right" for="ntid">NTID:</label>
                 </div>
                 <div class="col-lg-2">
-                     <input id="ntid" type="text"  class="form-control" title="---NTID---"/>
+                     <input id="ntid" type="text" class="form-control" title="---NTID---"/>
                 </div>
             </div>
         </div>
@@ -52,6 +52,7 @@
                     <th>Project</th>
                     <th>NTID</th>
                     <th>Score</th>
+                    <th>TotalScore</th>
                     <th>ExamTime</th>
                 </tr>
             </thead>
@@ -67,7 +68,10 @@
             Select_Department();
             Select_Project();
             Select_Exam();
-        })
+            initial();
+        });
+            
+
 
     </script>
 </asp:Content>

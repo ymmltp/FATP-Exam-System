@@ -6,6 +6,7 @@ function Select_Project() {
         type: "GET",
         url: url,
         dataType: "json",
+        async: false,
         success: function (data) {
             for (var i = 0; i < data.length; i++) {
                 option += "<option value=\"" + data[i].Project + "\">" + data[i].Project + "</option>";
@@ -26,6 +27,7 @@ function Select_Department() {
         type: "GET",
         url: url,
         dataType: "json",
+        async: false,
         success: function (data) {
             for (var i = 0; i < data.length; i++) {
                 option += "<option value=\"" + data[i].Department + "\">" + data[i].Department + "</option>";
@@ -46,6 +48,7 @@ function Select_Exam() {
         type: "GET",
         url: url,
         dataType: "json",
+        async: false,
         success: function (data) {
             for (var i = 0; i < data.length; i++) {
                 option += '<option value="' + data[i].ExamID + '">' + data[i].ExamName + '</option>';

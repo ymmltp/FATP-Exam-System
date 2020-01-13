@@ -152,7 +152,7 @@
             Select_Department();
             Select_Project();
             Select_Exam();
-            User_Table();
+            //User_Table();
         })
     </script>
 </asp:Content>

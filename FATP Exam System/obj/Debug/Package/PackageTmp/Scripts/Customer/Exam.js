@@ -15,7 +15,7 @@ function Get_ExamInfo() {
         dataType: "json",
         async: false,
         success: function (data) {
-            if (data.ExamID !== 0) {
+            if (data.ExamID !== "0") {
                 examinfo = data;
                 var singlecount = data.SingleCount;
                 var multiplecount = data.MultipleCount;
@@ -52,7 +52,7 @@ function Get_Question() {
         dataType: "json",
         async: false,
         success: function (data) {
-            if (data.ExamID !== 0) {
+            if (data.ExamID !== "0") {
                 qlist = data;
             }
         },

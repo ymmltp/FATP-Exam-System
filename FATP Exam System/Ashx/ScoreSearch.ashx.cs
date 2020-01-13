@@ -20,24 +20,25 @@ namespace FATP_Exam_System.Ashx
             string examtype = context.Request.QueryString["examtype"];
             string department = context.Request.QueryString["department"];
             string project = context.Request.QueryString["project"];
-            if (string.IsNullOrEmpty(examtype))
+
+            if (Int32.Parse(HttpContext.Current.Session["Power"].ToString()) >= 3) //管理员只能查看自己管理的考试
             {
-                examtype = HttpContext.Current.Session["ExamType"].ToString();
+                if (string.IsNullOrEmpty(examtype))
+                {
+                    examtype = HttpContext.Current.Session["ExamType"].ToString();
+                }
+                if (examtype == "0")
+                {
+                    examtype = null;
+                }
             }
-            if (examtype == "0")
-            {
-                examtype = null;
-            }
+
             DataTable dt = new DataTable();
             string json = "";
             switch (type)
             {
                 case "examscore":
                     dt = BLL.GetData.GetExamScore_Table(examtype, project, department, ntid);
-                    break;
-                case "personalScore":
-                    ntid = HttpContext.Current.Session["NTID"].ToString();
-                    dt = BLL.GetData.GetExamScore_Table(examtype, ntid);
                     break;
                 default:
                     json = "Sorry,don't have such function...Please check your url";
