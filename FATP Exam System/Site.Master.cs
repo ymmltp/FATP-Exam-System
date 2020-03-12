@@ -16,13 +16,10 @@ namespace FATP_Exam_System
             {
                 if (Session["UserName"] != null)
                 {
-                    string user = Session["UserName"].ToString();
                     User_ID.Text = Session["UserName"].ToString() +"  ";
                     Sign_Off.Visible = true;
                 }
             }
-
-
         }
 
         protected void Sing_Out_Click(object sender, EventArgs e)
@@ -30,7 +27,7 @@ namespace FATP_Exam_System
             Sign_Off.Visible = false;
             Session.Clear();
             User_ID.Text = "Sign In";
-            Response.Redirect("Default.aspx");
+            Response.Redirect("LogIn.aspx");
         }
     }
 }

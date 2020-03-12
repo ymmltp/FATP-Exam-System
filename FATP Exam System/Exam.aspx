@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Exam.aspx.cs" Inherits="FATP_Exam_System.Exam" %>
+﻿<%@ Page Title="Exam" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Exam.aspx.cs" Inherits="FATP_Exam_System.Exam" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 <div class="container-fiuled">
     <div class="panel-default" style="margin-top:20px;">
@@ -29,7 +29,7 @@
                     </div>
                 </div>
                 <div class="exam-select">
-                    <ul id="select-list">
+                    <ul id="select-list" >
                         <%--选项--%>
                     </ul>
                 </div>
@@ -57,6 +57,7 @@
                 <label class="col-form-label">You haven't answer all question.</label>
                 <label class="col-form-label">Sure you want to Submit?</label>
           </div>
+
           <div class="modal-footer">
             <button class="btn btn-primary" id="SureBut" type="button">Sure</button>
             <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close">Cancel</button>
@@ -64,12 +65,12 @@
         </div>
       </div>
     </div>
-
 </div>
+
     <script src="Scripts/Customer/Exam.js"></script>
     <script>
         $(document).ready(function () {
             Get_ExamInfo()
-        })
+        });
     </script>
 </asp:Content>

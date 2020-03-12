@@ -135,7 +135,8 @@ function Exam_Table() {
     });
 }
 function User_Table() {
-    var url = "Ashx/GetTable.ashx?type=user&RandID=" + Math.random();
+    var examtype = $("#examsele").val();
+    var url = "Ashx/GetTable.ashx?type=user&examtype=" + examtype + "&RandID=" + Math.random();
     var option = "";
     $.ajax({
         type: "GET",
@@ -161,7 +162,8 @@ function User_Table() {
     });
 }
 function Question_Table() {
-    var url = "Ashx/GetTable.ashx?type=question&RandID=" + Math.random();
+    var examtype = $("#examsele").val();
+    var url = "Ashx/GetTable.ashx?type=question&examtype=" + examtype + "&RandID=" + Math.random();
     var option = "";
     $.ajax({
         type: "GET",
@@ -231,8 +233,8 @@ function Add_User() {
     var url = encodeURI("Ashx/Add.ashx?type=user&ntid=" + ntid + "&role=" + role + "&project=" + project + "&department=" + department + "&examtype=" + examtype + "&RandID=" + Math.random());
     $.getJSON(url, function (data) {
         alert(data);
-        $("#examsele").selectpicker("val", "");
-        $("#examsele").selectpicker("refresh");
+        //$("#examtype").selectpicker("val", "");
+        //$("#examtype").selectpicker("refresh");
         $("#rolesele").selectpicker("val", "");
         $("#rolesele").selectpicker("refresh");
         $("#ntid").val("");
@@ -255,6 +257,18 @@ function Add_Question() {
     var url = encodeURI("Ashx/Add.ashx?type=question&examtype=" + examtype + "&question=" + question + "&questiontype=" + questiontype + "&answer=" + answer + "&s1=" + s1 + "&s2=" + s2 + "&s3=" + s3 + "&s4=" + s4 + "&RandID=" + Math.random());
     $.getJSON(url, function (data) {
         alert(data);
+        //$("#examsele").selectpicker("val", "");
+        //$("#examsele").selectpicker("refresh");
+        $("#questiontypesele").selectpicker("val", "");
+        $("#questiontypesele").selectpicker("refresh");
+        $("#question").val("");
+        $("#answer").selectpicker("val", "");
+        $("#answer").selectpicker("refresh");
+        $("#s1").val("");
+        $("#s2").val("");
+        $("#s3").val("");
+        $("#s4").val("");
+        Question_Table()
     });
 }
 
@@ -435,8 +449,8 @@ function Save_User(userid) {
     var url = encodeURI("Ashx/Update.ashx?type=user&userID=" + userid + "&examtype=" + examtype + "&ntid=" + ntid + "&role=" + role + "&department=" + department + "&project=" + project + "&RandID=" + Math.random());
     $.getJSON(url, function (data) {
         alert(data);
-        $("#examsele").selectpicker("val", "");
-        $("#examsele").selectpicker("refresh");
+        //$("#examsele").selectpicker("val", "");
+        //$("#examsele").selectpicker("refresh");
         $("#rolesele").selectpicker("val", "");
         $("#rolesele").selectpicker("refresh");
         $("#ntid").val("");
@@ -473,7 +487,6 @@ function Edit_Question(object) {
             }
             else {
                 examtype = data[0].ExamID;
-
                 $("#examsele").selectpicker("val", examtype);
                 $("#examsele").selectpicker("refresh");
                 $("#questiontypesele").selectpicker("val", questiontype);
@@ -485,7 +498,6 @@ function Edit_Question(object) {
                 $("#s4").val(s4);
                 $("#answer").selectpicker("val", answer);
                 $("#answer").selectpicker("refresh");
-
                 $("#Addbtn").attr("class", "btn btn-warning");
                 $("#Addbtn").attr("onclick", "Save_Question(" + questionid + ")");
                 $("#Addbtn").html("Save");
@@ -508,6 +520,21 @@ function Save_Question(questionid) {
     var url = encodeURI("Ashx/Update.ashx?type=question&questionID=" + questionid + "&examtype=" + examtype + "&question=" + question + "&questiontype=" + questiontype + "&s1=" + s1 + "&s2=" + s2 + "&answer=" + answer + "&s3=" + s3 + "&s4=" + s4 + "&RandID=" + Math.random());
     $.getJSON(url, function (data) {
         alert(data);
+        //$("#examsele").selectpicker("val", "");
+        //$("#examsele").selectpicker("refresh");
+        $("#questiontypesele").selectpicker("val", "");
+        $("#questiontypesele").selectpicker("refresh");
+        $("#question").val("");
+        $("#answer").selectpicker("val", "");
+        $("#answer").selectpicker("refresh");
+        $("#s1").val("");
+        $("#s2").val("");
+        $("#s3").val("");
+        $("#s4").val("");
+        $("#Addbtn").attr("class", "btn btn-success");
+        $("#Addbtn").attr("onclick", "Add_User()");
+        $("#Addbtn").html("Add");
+        Question_Table();
     });
 }
 
@@ -573,9 +600,6 @@ function Search_Question() {
         }
     });
 }
-
-//Upload  请见下回分晓
-
 
 //QuestionType change  不生效
 function change_type() {

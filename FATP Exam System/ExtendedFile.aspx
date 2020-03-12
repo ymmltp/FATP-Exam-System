@@ -1,4 +1,4 @@
-﻿<%@ Page Title="About" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ExtendedFile.aspx.cs" Inherits="FATP_Exam_System.About" %>
+﻿<%@ Page Title="Excel Model" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ExtendedFile.aspx.cs" Inherits="FATP_Exam_System.About" %>
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 <div class="container-fiuled">
     <div class="panel-default" style="margin-top:20px;">

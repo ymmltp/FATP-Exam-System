@@ -65,6 +65,7 @@ function Get_Question() {
 function Question_Select(object) {
     if (object) {
         Save_Answer(currentQuestionOption, currentQuestionIndex);
+        object.setAttribute("class", "question-list-item selected")
         var index = object.getAttribute("data");
         currentQuestionIndex = index;
         currentQuestionOption = object;
@@ -80,7 +81,7 @@ function Question_Select(object) {
                         sl += 'checked=true ';
                     }
                 }
-                sl += ' style="margin-left:-1em; margin-right:-2em;" class="col-xs-1"/> <label for="s1" class="col-xs-11">' + currentQuestion.S1 + '</label></li>';
+                sl += ' style="margin-left:-1em; margin-right:-2em;" class="col-md-1"/><label for="s1" class="col-md-11">' + currentQuestion.S1 + '</label></li>';
             }
             if (currentQuestion.S2.length !== 0) {
                 sl += '<li class="select-list-item row"><input type="radio" id="s2" value="B" name="Q' + index + '"';
@@ -89,7 +90,7 @@ function Question_Select(object) {
                         sl += 'checked=true ';
                     }
                 }
-                sl += ' style="margin-left:-1em; margin-right:-2em;" class="col-xs-1"/> <label for="s2" class="col-xs-11">' + currentQuestion.S2 + '</label></li>';
+                sl += ' style="margin-left:-1em; margin-right:-2em;" class="col-md-1"/> <label for="s2" class="col-md-11">' + currentQuestion.S2 + '</label></li>';
             }
             if (currentQuestion.S3.length !== 0) {
                 sl += '<li class="select-list-item row"><input type="radio" id="s3" value="C" name="Q' + index + '"';
@@ -98,7 +99,7 @@ function Question_Select(object) {
                         sl += 'checked=true ';
                     }
                 }
-                sl += ' style="margin-left:-1em; margin-right:-2em;" class="col-xs-1"/> <label for="s3" class="col-xs-11">' + currentQuestion.S3 + '</label></li>';
+                sl += ' style="margin-left:-1em; margin-right:-2em;" class="col-md-1"/> <label for="s3" class="col-md-11">' + currentQuestion.S3 + '</label></li>';
             }
             if (currentQuestion.S4.length !== 0) {
                 sl += '<li class="select-list-item row"><input type="radio" id="s4" value="D" name="Q' + index + '"';
@@ -107,7 +108,7 @@ function Question_Select(object) {
                         sl += 'checked=true ';
                     }
                 }
-                sl += ' style="margin-left:-1em; margin-right:-2em;" class="col-xs-1"/> <label for="s4" class="col-xs-11">' + currentQuestion.S4 + '</label></li> ';
+                sl += ' style="margin-left:-1em; margin-right:-2em;" class="col-md-1"/> <label for="s4" class="col-md-11">' + currentQuestion.S4 + '</label></li> ';
             }
         }
         else if (qt === "Multiple") {
@@ -118,7 +119,7 @@ function Question_Select(object) {
                         sl += 'checked=true ';
                     }
                 }
-                sl += ' style="margin-left:-1em; margin-right:-2em;" class="col-xs-1"/> <label for="s1" class="col-xs-11">' + currentQuestion.S1 + '</label ></li > ';
+                sl += ' style="margin-left:-1em; margin-right:-2em;" class="col-md-1"/> <label for="s1" class="col-md-11">' + currentQuestion.S1 + '</label ></li > ';
             }
             if (currentQuestion.S2.length !== 0) {
                 sl += '<li class="select-list-item row"><input type="checkbox" id="s2" value="B" name="Q' + index + '"';
@@ -127,7 +128,7 @@ function Question_Select(object) {
                         sl += 'checked=true ';
                     }
                 }
-                sl += ' style="margin-left:-1em; margin-right:-2em;" class="col-xs-1"/> <label for="s2" class="col-xs-11">' + currentQuestion.S2 + '</label ></li> ';
+                sl += ' style="margin-left:-1em; margin-right:-2em;" class="col-md-1"/> <label for="s2" class="col-md-11">' + currentQuestion.S2 + '</label ></li> ';
             }
             if (currentQuestion.S3.length !== 0) {
                 sl += '<li class="select-list-item row"><input type="checkbox" id="s3" value="C" name="Q' + index + '"';
@@ -136,7 +137,7 @@ function Question_Select(object) {
                         sl += 'checked=true ';
                     }
                 }
-                sl += ' style="margin-left:-1em; margin-right:-2em;" class="col-xs-1"/> <label for="s3" class="col-xs-11">' + currentQuestion.S3 + '</label ></li> ';
+                sl += ' style="margin-left:-1em; margin-right:-2em;" class="col-md-1"/> <label for="s3" class="col-md-11">' + currentQuestion.S3 + '</label ></li> ';
             }
             if (currentQuestion.S4.length !== 0) {
                 sl += '<li class="select-list-item row"><input type="checkbox" id="s4" value="D" name="Q' + index + '"';
@@ -145,7 +146,7 @@ function Question_Select(object) {
                         sl += 'checked=true ';
                     }
                 }
-                sl += ' style="margin-left:-1em; margin-right:-2em;" class="col-xs-1"/> <label for="s4" class="col-xs-11">' + currentQuestion.S4 + '</label ></li > ';
+                sl += ' style="margin-left:-1em; margin-right:-2em;" class="col-md-1"/> <label for="s4" class="col-md-11">' + currentQuestion.S4 + '</label ></li > ';
             }
         }
         $("#select-list").html("");
@@ -199,7 +200,7 @@ $("#btn-next").click(function () {
 $("#btn-submit").click(function () {
     Save_Answer(currentQuestionOption,currentQuestionIndex);
     if (Is_All_Done()) {
-        Submit_Answer();
+        Calculate_Score();
     }
     else {
         $("#SubmitModal").modal("show");
@@ -209,13 +210,12 @@ $("#SureBut").click(function () {
     try {
         $("#SubmitModal").modal("hide");
         Calculate_Score();
-        Submit_Answer();
     } catch (e) {
         alert(e);
     }
 })
 
-//计算得分
+//计算得分&提交分数
 function Calculate_Score() {
     var singlescore = examinfo.SingleScore;
     var multiplescore = examinfo.MultipleScore;
@@ -232,6 +232,7 @@ function Calculate_Score() {
             qlist[a].FinalResult = false;
         }
     }
+    Submit_Answer();
 }
 //提交答案(只提交分数)
 function Submit_Answer() {
@@ -292,7 +293,7 @@ function Check_Answer(object) {
                     sl += 'checked=true ';
                 }
             }
-            sl += ' style="margin-left:-1em; margin-right:-2em;" class="col-xs-1"/> <label for="s1" class="col-xs-11">' + currentQuestion.S1 + '</label></li>';
+            sl += ' style="margin-left:-1em; margin-right:-2em;" class="col-md-1"/> <label for="s1" class="col-md-11">' + currentQuestion.S1 + '</label></li>';
         }
         if (currentQuestion.S2.length != 0) {
             sl += '<li class="select-list-item row"><input type="radio" id="s2" value="B" name="Q' + index + '"';
@@ -301,7 +302,7 @@ function Check_Answer(object) {
                     sl += 'checked=true ';
                 }
             }
-            sl += ' style="margin-left:-1em; margin-right:-2em;" class="col-xs-1"/> <label for="s2" class="col-xs-11">' + currentQuestion.S2 + '</label></li>';
+            sl += ' style="margin-left:-1em; margin-right:-2em;" class="col-md-1"/> <label for="s2" class="col-md-11">' + currentQuestion.S2 + '</label></li>';
         }
         if (currentQuestion.S3.length != 0) {
             sl += '<li class="select-list-item row"><input type="radio" id="s3" value="C" name="Q' + index + '"';
@@ -310,7 +311,7 @@ function Check_Answer(object) {
                     sl += 'checked=true ';
                 }
             }
-            sl += ' style="margin-left:-1em; margin-right:-2em;" class="col-xs-1"/> <label for="s3" class="col-xs-11">' + currentQuestion.S3 + '</label></li>';
+            sl += ' style="margin-left:-1em; margin-right:-2em;" class="col-md-1"/> <label for="s3" class="col-md-11">' + currentQuestion.S3 + '</label></li>';
         }
         if (currentQuestion.S4.length != 0) {
             sl += '<li class="select-list-item row"><input type="radio" id="s4" value="D" name="Q' + index + '"';
@@ -319,7 +320,7 @@ function Check_Answer(object) {
                     sl += 'checked=true ';
                 }
             }
-            sl += ' style="margin-left:-1em; margin-right:-2em;" class="col-xs-1"/> <label for="s4" class="col-xs-11">' + currentQuestion.S4 + '</label></li> ';
+            sl += ' style="margin-left:-1em; margin-right:-2em;" class="col-md-1"/> <label for="s4" class="col-md-11">' + currentQuestion.S4 + '</label></li> ';
         }
         sl += '<li class="select-list-item row" style="font-weight:800;">&nbsp&nbsp&nbspCorrect Answer：<span style="color:blue;font-weight:800;">' + currentQuestion.Answer.toString() + '</span></li>';
     }
@@ -331,7 +332,7 @@ function Check_Answer(object) {
                     sl += 'checked=true ';
                 }
             }
-            sl += ' style="margin-left:-1em; margin-right:-2em;" class="col-xs-1"/> <label for="s1" class="col-xs-11">' + currentQuestion.S1 + '</label ></li > ';
+            sl += ' style="margin-left:-1em; margin-right:-2em;" class="col-md-1"/> <label for="s1" class="col-md-11">' + currentQuestion.S1 + '</label ></li > ';
         }
         if (currentQuestion.S2.length != 0) {
             sl += '<li class="select-list-item row"><input type="checkbox" id="s2" value="B" name="Q' + index + '"';
@@ -340,7 +341,7 @@ function Check_Answer(object) {
                     sl += 'checked=true ';
                 }
             }
-            sl += ' style="margin-left:-1em; margin-right:-2em;" class="col-xs-1"/> <label for="s2" class="col-xs-11">' + currentQuestion.S2 + '</label ></li> ';
+            sl += ' style="margin-left:-1em; margin-right:-2em;" class="col-md-1"/> <label for="s2" class="col-md-11">' + currentQuestion.S2 + '</label ></li> ';
         }
         if (currentQuestion.S3.length != 0) {
             sl += '<li class="select-list-item row"><input type="checkbox" id="s3" value="C" name="Q' + index + '"';
@@ -349,7 +350,7 @@ function Check_Answer(object) {
                     sl += 'checked=true ';
                 }
             }
-            sl += ' style="margin-left:-1em; margin-right:-2em;" class="col-xs-1"/> <label for="s3" class="col-xs-11">' + currentQuestion.S3 + '</label ></li> ';
+            sl += ' style="margin-left:-1em; margin-right:-2em;" class="col-md-1"/> <label for="s3" class="col-md-11">' + currentQuestion.S3 + '</label ></li> ';
         }
         if (currentQuestion.S4.length != 0) {
             sl += '<li class="select-list-item row"><input type="checkbox" id="s4" value="D" name="Q' + index + '"';
@@ -358,7 +359,7 @@ function Check_Answer(object) {
                     sl += 'checked=true ';
                 }
             }
-            sl += ' style="margin-left:-1em; margin-right:-2em;" class="col-xs-1"/> <label for="s4" class="col-xs-11">' + currentQuestion.S4 + '</label ></li > ';
+            sl += ' style="margin-left:-1em; margin-right:-2em;" class="col-md-1"/> <label for="s4" class="col-md-11">' + currentQuestion.S4 + '</label ></li > ';
         }
         sl += '<li class="select-list-item row" style="font-weight:800;">&nbsp&nbsp&nbspCorrect Answer：<span style="color:blue;font-weight:800;">' + currentQuestion.Answer.toString() + '</span></li>';
     }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data;
+using MySql.Data.MySqlClient;
 
 namespace DAL
 {
@@ -153,13 +154,16 @@ namespace DAL
             DataTable dt = sp.Query(sql);
             return dt;
         }
-        public string Add_Exam(string examname,string totalscore,string passscore,string singlecount,string singlescore,string multiplecount,string multiplescore)
+        public string Add_Exam(string examname, string totalscore, string passscore, string singlecount, string singlescore, string multiplecount, string multiplescore, string ntid, string projetc, string department)
         {
             string mesg = "Add Exam success!";
             string sql = "INSERT into examconfig (ExamName,TotalScore,PassScore,SingleCount,EachSingleScore,MultipleCount,EachmultipleScore) VALUES('" + examname + "','" + totalscore + "','" + passscore + "','" + singlecount + "','" + singlescore + "','" + multiplecount + "','" + multiplescore + "' )";
             try
             {
                 sp.Insert(sql);
+                DataTable dt = GetExamConfig_Table(examname);
+                string examtype = dt.Rows[0]["ExamID"].ToString();
+                Add_User(examtype, ntid, projetc, department, "Admin");
             }
             catch (Exception e)
             {
@@ -188,6 +192,8 @@ namespace DAL
             try
             {
                 sp.Delete(sql);
+                Delete_All_Question(ExamID);
+                Delete_All_User(ExamID);
             }
             catch (Exception e)
             {
@@ -277,8 +283,23 @@ namespace DAL
             }
             return mesg;
         }
+        private string Delete_All_User(string examtype)
+        {
+            string mesg = "Delete User success!";
+            string sql = "DELETE FROM userlist WHERE ExamType='" + examtype + "'";
+            try
+            {
+                sp.Delete(sql);
+            }
+            catch (Exception e)
+            {
+                mesg = "Delete User fail!\n" + e.Message;
+            }
+            return mesg;
+        }
+
         #endregion
-        
+
         #region questionlist(select insert update delete)
         public DataTable GetQuestion_Table(string ExamType=null,string QuestionType=null)
         {
@@ -312,6 +333,13 @@ namespace DAL
         }
         public string Add_Question(string ExamType, string question, string questionType, string s1, string s2, string answer,string s3, string s4) 
         {
+            question = question.Replace("'", "''");
+            s1 = s1.Replace("'", "''");
+            s2 = s2.Replace("'", "''");
+            if (!string.IsNullOrEmpty(s3))
+                s3 = s3.Replace("'", "''");
+            if (!string.IsNullOrEmpty(s4))
+                s4 = s4.Replace("'", "''");
             string mesg = "Add Question success!";
             string sql = "INSERT INTO questionlist (ExamType,Question,QuestionType,SelectA,SelectB,SelectC,SelectD,Answer) VALUES ('" + ExamType + "','" + question + "','" + questionType + "','" + s1 + "','" + s2 + "','" + s3 + "','" + s4 + "','" + answer + "')";
             try
@@ -326,8 +354,16 @@ namespace DAL
         }
         public string Update_Question(string ID,string ExamType, string question, string questionType, string s1, string s2,string answer, string s3, string s4)
         {
+            question = question.Replace("'", "''");
+            s1 = s1.Replace("'", "''");
+            s2 = s2.Replace("'", "''");
+            if(!string.IsNullOrEmpty(s3))
+                s3 = s3.Replace("'", "''");
+            if(!string.IsNullOrEmpty(s4))
+                s4 = s4.Replace("'", "''");
             string mesg = "Update Question success!";
-            string sql = "UPDATE questionlist SET ExamType='" + ExamType + "',Question='" + question + "',QuestionType='" + questionType + "',SelectA='" + s1 + "',SelectB='" + s2 + "',SelectC='" + s3 + "',SelectD='" + s4 + "',Answer='" + answer + "' WHERE ID='" + ID + "'";
+            string sql = string.Format("UPDATE questionlist SET ExamType='{0}',Question='{1}',QuestionType='{2}',SelectA='{3}',SelectB='{4}',SelectC='{5}',SelectD='{6}',Answer='{7}' WHERE ID='{8}'",
+                                         ExamType,question,questionType,s1,s2,s3,s4,answer,ID);
             try
             {
                 sp.Insert(sql);
@@ -342,6 +378,20 @@ namespace DAL
         {
             string mesg = "Delete Question success!";
             string sql = "DELETE FROM questionlist WHERE ID='" + ID + "'";
+            try
+            {
+                sp.Delete(sql);
+            }
+            catch (Exception e)
+            {
+                mesg = "Delete Question fail!\n" + e.Message;
+            }
+            return mesg;
+        }
+        private string Delete_All_Question(string examtype)
+        {
+            string mesg = "Delete Question success!";
+            string sql = "DELETE FROM questionlist WHERE ExamType='" + examtype + "'";
             try
             {
                 sp.Delete(sql);

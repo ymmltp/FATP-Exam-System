@@ -38,14 +38,14 @@
                     <span class="glyphicon glyphicon-lock form-control-feedback input-icon"></span>
                     <asp:Label ID="lpassword" style="color:red;" Visible="false" runat="server">Error PassWord or UserName</asp:Label>
                 </div>
-                <div class="form-group has-feedback">
+<%--                <div class="form-group has-feedback">
                     <label class="sr-only"> User </label>
                     <asp:DropDownList ID="SeleUser" CssClass="selectpicker form-control ui-select" runat="server">
                         <asp:ListItem Value="User">User</asp:ListItem>
                         <asp:ListItem Value="Admin">Admin</asp:ListItem>
                     </asp:DropDownList>
                     <asp:Label id="lusertype" style="color:red;" Visible="False" runat="server">Please enter your UserType</asp:Label>
-                </div>
+                </div>--%>
                 <div class="form-group has-feedback">
                     <label class="sr-only"> ExamType </label>
                     <asp:DropDownList ID="SeleExam" CssClass="selectpicker form-control ui-select" runat="server">
@@ -61,6 +61,11 @@
             </div>
         </div>
     </div>
+
+        
+               
+
+
             <footer style="text-align:center;color:gray">
                 <p>&copy; <%: DateTime.Now.Year %> - WuXi FATP Exam System</p>
             </footer>

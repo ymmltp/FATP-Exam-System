@@ -34,7 +34,7 @@ namespace DAL
         }
 
         //获取用户信息
-        public UserInfo GetUserInfo(string ntid, string role, string examtype)
+        public UserInfo GetUserInfo(string ntid,string examtype,string role=null)
         {
             userinfo.NTID = ntid;
             userinfo.DisplayName = ad.GetADDispalyName(ntid);
@@ -54,6 +54,7 @@ namespace DAL
             else {
                 if (IsJoinExam(ntid, examtype))
                 {
+                    //if((Int32)(Enum.Parse(typeof(UserGroupEnum), userlist.Rows[0]["UserLevel"].ToString()))> (Int32)(Enum.Parse(typeof(UserGroupEnum),role)))
                     userinfo.ExamType = Int32.Parse(examtype);
                     userinfo.UserGroup = (UserGroupEnum)(Enum.Parse(typeof(UserGroupEnum), userlist.Rows[0]["UserLevel"].ToString()));
                     userinfo.Project= userlist.Rows[0]["Project"].ToString();

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="SetQuestion.aspx.cs" Inherits="FATP_Exam_System.SetQuestion" %>
+﻿<%@ Page Title="Set Question" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="SetQuestion.aspx.cs" Inherits="FATP_Exam_System.SetQuestion" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="container-fiuled">
     <div class="panel-default" style="margin-top:20px;">
@@ -22,7 +22,7 @@
                 </div>
                 <div class="col-lg-1"></div>
                 <div class="col-lg-1">
-                    <button id="Addbtn" class="btn btn-success" style="margin-bottom:0px;width:70px" onclick="Add_Question()">Add</button>
+                    <button id="Addbtn" class="btn btn-success" type="button" style="margin-bottom:0px;width:70px" onclick="Add_Question()">Add</button>
                 </div>
                 <div class="col-lg-1">
                     <button id="showmodel" class="btn btn-info" type="button" style="margin-bottom:0px;width:70px">Upload</button>

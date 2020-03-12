@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="SetProject.aspx.cs" Inherits="FATP_Exam_System.SetProject" %>
+﻿<%@ Page Title="Set Project" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="SetProject.aspx.cs" Inherits="FATP_Exam_System.SetProject" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 <div class="container-fiuled">
     <div class="panel-default" style="margin-top:20px;">

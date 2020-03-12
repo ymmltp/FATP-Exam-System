@@ -15,9 +15,9 @@ namespace BLL
         {
             return ad.CheckNTIDAuth(ntid, password);
         }
-        public static UserInfo GetUserInfo(string ntid,string role, string examtype)
+        public static UserInfo GetUserInfo(string ntid,string examtype,string role=null)
         {
-            return ad.GetUserInfo(ntid, role, examtype);
+            return ad.GetUserInfo(ntid, examtype,role);
         }
     }
 }

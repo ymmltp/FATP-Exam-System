@@ -65,9 +65,9 @@ namespace BLL
         {
             return _myinfo.GetExamConfig_by_ExamType(examType);
         }
-        public static string Add_Exam(string examname, string totalscore, string passscore, string singlecount, string singlescore, string multiplecount, string multiplescore)
+        public static string Add_Exam(string examname, string totalscore, string passscore, string singlecount, string singlescore, string multiplecount, string multiplescore,string ntid=null,string project=null,string department=null)
         {
-            return _myinfo.Add_Exam(examname, totalscore, passscore, singlecount, singlescore, multiplecount, multiplescore);
+            return _myinfo.Add_Exam(examname, totalscore, passscore, singlecount, singlescore, multiplecount, multiplescore, ntid, project, department);
         }
         public static string Update_Exam(string ExamID, string examname, string totalscore, string passscore, string singlecount, string singlescore, string multiplecount, string multiplescore)
         {

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="SetExam.aspx.cs" Inherits="FATP_Exam_System.SetExam" %>
+﻿<%@ Page Title="Exam Config" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="SetExam.aspx.cs" Inherits="FATP_Exam_System.SetExam" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 <div class="container-fiuled">
     <div class="panel-default" style="margin-top:20px;">
@@ -82,10 +82,11 @@
       <div class="modal-dialog" role="document" style="width:400px">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Check</h5>
+            <h5 class="modal-title" style="font-weight:600;">Notice</h5>
           </div>
           <div class="modal-body">
-                <label class="col-form-label">Please sure you want to delete this list</label>
+              <p class="col-form-label" style="color:#FF0000;">If you delete this exam All of it's information (include Question and User) will be delete.</p>
+              <p class="col-form-label">Please sure you want to delete this Exam.</p>
           </div>
           <div class="modal-footer">
             <button class="btn btn-primary" id="exam-SureBut">Sure</button>
@@ -99,7 +100,7 @@
     <script src="Scripts/Customer/SettingJS.js"></script>
     <script>
         $(document).ready(function(){
-                Exam_Table();
+            Exam_Table();
         })
     </script>
 </asp:Content>

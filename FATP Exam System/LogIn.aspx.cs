@@ -13,29 +13,43 @@ namespace FATP_Exam_System
     {
         private string ntid;
         private string password;
-        private string userType;
+        //private string userType;
         private string examType;
-        private string examName;
+        //private string examName;
         private UserInfo userinfo;
+        private string role;
         DataTable dt;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                dt = new DataTable();
-                dt = BLL.GetData.GetExamConfig_Table();
-                ListItem _blank = new ListItem();
-                _blank.Value = "0";
-                _blank.Text = "_Blank";
-                SeleExam.Items.Add(_blank);
-                for (int i = 0; i < dt.Rows.Count; i++)
+                if (Request.QueryString.Count>0)
                 {
-                    ListItem item = new ListItem();
-                    item.Value = dt.Rows[i]["ExamID"].ToString();
-                    item.Text = dt.Rows[i]["ExamName"].ToString();
-                    SeleExam.Items.Add(item);
+                    ntid = Request["ntid"];
+                    examType = Request["examtype"];
+                    role = Request["role"];
+                    if (!string.IsNullOrEmpty(ntid) && !string.IsNullOrEmpty(examType))
+                    {
+                        Get_Session_Data(ntid, examType,role);
+                    }
+                }
+                else {
+                    dt = new DataTable();
+                    dt = BLL.GetData.GetExamConfig_Table();
+                    ListItem _blank = new ListItem();
+                    _blank.Value = "0";
+                    _blank.Text = "_Blank";
+                    SeleExam.Items.Add(_blank);
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        ListItem item = new ListItem();
+                        item.Value = dt.Rows[i]["ExamID"].ToString();
+                        item.Text = dt.Rows[i]["ExamName"].ToString();
+                        SeleExam.Items.Add(item);
+                    }
                 }
             }
+            
         }
 
         protected void Password_TextChanged(object sender, EventArgs e)
@@ -58,7 +72,7 @@ namespace FATP_Exam_System
         {
             ntid = TextBox1.Text;
             password = TextBox2.Text;
-            userType = SeleUser.SelectedItem.Value;
+            //userType = SeleUser.SelectedItem.Value;
             examType = SeleExam.SelectedItem.Value;
             if (ntid == "User001")
             {
@@ -76,7 +90,7 @@ namespace FATP_Exam_System
                         Session["Power"] = (int)(UserGroupEnum)(Enum.Parse(typeof(UserGroupEnum), "User"));
                         Session["Project"] = "null";
                         Session["Department"] = "null";
-                        Response.Redirect("Default.aspx");
+                        Response.Redirect("Exam.aspx");
                     }
                 }
                 else
@@ -87,21 +101,7 @@ namespace FATP_Exam_System
             else {
                 if (Auth(ntid, password))
                 {
-                    userinfo = GetUserInfo(ntid, userType, examType);
-                    if (userinfo.ExamType == 999999)
-                    {
-                        lexamtype.Visible = true;
-                    }
-                    else
-                    {
-                        Session["NTID"] = userinfo.NTID;
-                        Session["UserName"] = userinfo.DisplayName;
-                        Session["ExamType"] = userinfo.ExamType;
-                        Session["Power"] = (int)userinfo.UserGroup;
-                        Session["Project"] = userinfo.Project;
-                        Session["Department"] = userinfo.Department;
-                        Response.Redirect("Default.aspx");
-                    }
+                    Get_Session_Data(ntid, examType);
                 }
                 else
                 {
@@ -110,13 +110,35 @@ namespace FATP_Exam_System
             }
         }
 
+        protected void Get_Session_Data(string ntid,string examType,string role="")
+        {
+            userinfo = GetUserInfo(ntid, examType, role);
+            if (userinfo.ExamType == 999999)
+            {
+                lexamtype.Visible = true;
+            }
+            else
+            {
+                Session["NTID"] = userinfo.NTID;
+                Session["UserName"] = userinfo.DisplayName;
+                Session["ExamType"] = userinfo.ExamType;
+                Session["Power"] = (int)userinfo.UserGroup;
+                Session["Project"] = userinfo.Project;
+                Session["Department"] = userinfo.Department;
+                if (examType == "0")
+                    Response.Redirect("SetExam.aspx");
+                else
+                    Response.Redirect("Exam.aspx");
+            }
+        }
+
         protected bool Auth(string ntid, string password)
         {
             return BLL.Auth.CheckNTIDAuth(ntid, password);
         }
-        protected UserInfo GetUserInfo(string ntid, string usertype, string examtype)
+        protected UserInfo GetUserInfo(string ntid, string examtype,string role=null)
         {
-            return BLL.Auth.GetUserInfo(ntid, usertype, examtype);
+            return BLL.Auth.GetUserInfo(ntid,examtype,role);
         }
     }
 }

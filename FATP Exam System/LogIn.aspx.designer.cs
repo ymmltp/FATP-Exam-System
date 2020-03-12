@@ -49,24 +49,6 @@ namespace FATP_Exam_System {
         protected global::System.Web.UI.WebControls.Label lpassword;
         
         /// <summary>
-        /// SeleUser control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList SeleUser;
-        
-        /// <summary>
-        /// lusertype control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lusertype;
-        
-        /// <summary>
         /// SeleExam control.
         /// </summary>
         /// <remarks>

@@ -45,7 +45,10 @@ namespace FATP_Exam_System.Ashx
                     json = Newtonsoft.Json.JsonConvert.SerializeObject(callback);
                     break;
                 case "exam":
-                    callback = BLL.GetData.Add_Exam(examname, totalscore, passscore, singlecount, singlescore, multiplecount, multiplescore);
+                    ntid= HttpContext.Current.Session["NTID"].ToString();
+                    project = HttpContext.Current.Session["Project"].ToString();
+                    department= HttpContext.Current.Session["Department"].ToString();
+                    callback = BLL.GetData.Add_Exam(examname, totalscore, passscore, singlecount, singlescore, multiplecount, multiplescore,ntid,project,department);
                     json = Newtonsoft.Json.JsonConvert.SerializeObject(callback);
                     break;
                 case "question":

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="PersonalScore.aspx.cs" Inherits="FATP_Exam_System.PersonalScore" %>
+﻿<%@ Page Title="Personal Score" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="PersonalScore.aspx.cs" Inherits="FATP_Exam_System.PersonalScore" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="container-fiuled">
     <div class="panel-default" style="margin-top:20px;">

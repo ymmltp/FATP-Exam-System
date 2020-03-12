@@ -15,7 +15,10 @@ namespace FATP_Exam_System
             {
                 if (Session["UserName"] != null)
                 {
-                    Error_Text.Text = "Sorry, you have no access to this page.Please contact with Admin...";
+                    Error_Text.Text = @"<h3>Sorry,you have no access to this page!</h3></br>
+                                    <h5>Please choose _Blank to get into this setting.</br></br>
+                                    If you don't have authority to choose _Blank. Please contact with following address.</h5></br>
+                                    <h5><strong>Support:</strong><address><a href='mailto: Adele_Lu @Jabil.com'>Adele_Lu@Jabil.com</a></address></h5></br>";
                 }
                 else
                 {

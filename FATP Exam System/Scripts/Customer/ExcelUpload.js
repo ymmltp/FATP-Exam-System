@@ -118,6 +118,17 @@ function UploadUser() {
         dataType: "json",
         success: function (data) {
             alert(data);
+            $("#rolesele").selectpicker("val", "");
+            $("#rolesele").selectpicker("refresh");
+            $("#ntid").val("");
+            $("#projsele").selectpicker("val", "");
+            $("#projsele").selectpicker("refresh");
+            $("#departmentsele").selectpicker("val", "");
+            $("#departmentsele").selectpicker("refresh");
+            $("#Addbtn").attr("class", "btn btn-success");
+            $("#Addbtn").attr("onclick", "Add_User()");
+            $("#Addbtn").html("Add");
+            User_Table();
         },
         error: function (data) {
             alert(data.responseText);
@@ -140,6 +151,19 @@ function UploadQuestion() {
         },
         error: function (data) {
             alert(data.responseText);
+            $("#questiontypesele").selectpicker("val", "");
+            $("#questiontypesele").selectpicker("refresh");
+            $("#question").val("");
+            $("#answer").selectpicker("val", "");
+            $("#answer").selectpicker("refresh");
+            $("#s1").val("");
+            $("#s2").val("");
+            $("#s3").val("");
+            $("#s4").val("");
+            $("#Addbtn").attr("class", "btn btn-success");
+            $("#Addbtn").attr("onclick", "Add_User()");
+            $("#Addbtn").html("Add");
+            Question_Table();
         }
     })
 }
