@@ -21,6 +21,13 @@ namespace FATP_Exam_System.Ashx
             string examtype = context.Request.QueryString["examtype"];
             string department = context.Request.QueryString["department"];
             string project = context.Request.QueryString["project"];
+
+            //string ntid = context.Request.Cookies["ntid"].Value;
+            //string role = context.Request.Cookies["power"].Value;
+            //string examtype = context.Request.Cookies["examtype"].Value;
+            //string department = context.Request.Cookies["department"].Value;
+            //string project = context.Request.Cookies["project"].Value;
+
             string examname = context.Request.QueryString["examname"];
             string totalscore= context.Request.QueryString["totalscore"];
             string passscore = context.Request.QueryString["passscore"];
@@ -45,9 +52,9 @@ namespace FATP_Exam_System.Ashx
                     json = Newtonsoft.Json.JsonConvert.SerializeObject(callback);
                     break;
                 case "exam":
-                    ntid= HttpContext.Current.Session["NTID"].ToString();
-                    project = HttpContext.Current.Session["Project"].ToString();
-                    department= HttpContext.Current.Session["Department"].ToString();
+                    //ntid= HttpContext.Current.Session["NTID"].ToString();
+                    //project = HttpContext.Current.Session["Project"].ToString();
+                    //department= HttpContext.Current.Session["Department"].ToString();
                     callback = BLL.GetData.Add_Exam(examname, totalscore, passscore, singlecount, singlescore, multiplecount, multiplescore,ntid,project,department);
                     json = Newtonsoft.Json.JsonConvert.SerializeObject(callback);
                     break;

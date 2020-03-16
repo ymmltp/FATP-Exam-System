@@ -22,12 +22,33 @@
             <img src="images/jabil.png" class="sso-logo" alt="Jabil Circuit - Prod">
         </div>
         <div class="panel-body">
-            <form class="form-login" runat="server" id="formLogin">
+            <div class="form-login" runat="server" id="formLogin">
                 <p class="form-login-heading" id="sys-head"> JGP FATP Exam System
                     <!-- <strong>系统</strong> -->
                 </p>
                 <br/>
                 <div class="form-group has-feedback">
+                    <label class="sr-only" for="ntid"> NTID </label>
+                    <input id="ntid" class="form-control"/>
+                    <span class="glyphicon glyphicon-user form-control-feedback input-icon"></span>
+                </div>
+                <div class="form-group has-feedback">
+                    <label for="password" class="sr-only"> PassWord </label>
+                    <input id="password" class="form-control" type="password"/>
+                    <span class="glyphicon glyphicon-lock form-control-feedback input-icon"></span>
+                    <label id="errormsg1" style="visibility:hidden" >Error PassWord or UserName</label>
+                </div>
+                <div class="form-group has-feedback">
+                    <label class="sr-only"> ExamType </label>
+                    <select id="examsele" class="form-control selectpicker" title="---Select Exam---"  data-size="6"></select>
+                    <label id="errormsg2" style="visibility:hidden">Sorry you don't have access to this exam...</label>
+                </div>
+                 <div class="form-group has-feedback">
+                     <button id="Searchbtn" class="btn btn-primary" type="button" style="margin-bottom:0px;width:100%" onclick="Log_in()">Log In</button>
+                </div>
+
+
+                <%--<div class="form-group has-feedback">
                     <label class="sr-only" for="ntid"> NTID </label>
                     <asp:TextBox ID="TextBox1" CssClass="form-control" runat="server" OnTextChanged="Password_TextChanged"></asp:TextBox>
                     <span class="glyphicon glyphicon-user form-control-feedback input-icon"></span>
@@ -38,14 +59,6 @@
                     <span class="glyphicon glyphicon-lock form-control-feedback input-icon"></span>
                     <asp:Label ID="lpassword" style="color:red;" Visible="false" runat="server">Error PassWord or UserName</asp:Label>
                 </div>
-<%--                <div class="form-group has-feedback">
-                    <label class="sr-only"> User </label>
-                    <asp:DropDownList ID="SeleUser" CssClass="selectpicker form-control ui-select" runat="server">
-                        <asp:ListItem Value="User">User</asp:ListItem>
-                        <asp:ListItem Value="Admin">Admin</asp:ListItem>
-                    </asp:DropDownList>
-                    <asp:Label id="lusertype" style="color:red;" Visible="False" runat="server">Please enter your UserType</asp:Label>
-                </div>--%>
                 <div class="form-group has-feedback">
                     <label class="sr-only"> ExamType </label>
                     <asp:DropDownList ID="SeleExam" CssClass="selectpicker form-control ui-select" runat="server">
@@ -54,17 +67,13 @@
                 </div>
                 <div>
                     <asp:Button ID="ButtonLogIn" CssClass="btn btn-lg btn-primary btn-block" runat="server" Text="Sign In" OnClick="ButtonLogIn_Click"/>
-                </div>
-            </form>
+                </div>--%>
+            </div>
             <div class="sso-hint">
                 <span id="hint"></span>
             </div>
         </div>
     </div>
-
-        
-               
-
 
             <footer style="text-align:center;color:gray">
                 <p>&copy; <%: DateTime.Now.Year %> - WuXi FATP Exam System</p>
@@ -73,5 +82,15 @@
     <script src="Scripts/jquery-3.3.1.min.js"></script>
     <script src="Scripts/bootstrap.min.js"></script>
     <script src="Scripts/bootstrap-select.min.js"></script>
+    <script src="Scripts/Customer/SettingJS.js"></script>
+    <script src="Scripts/Customer/cookie.js"></script>
+    <script src="Scripts/Customer/login.js"></script>
+    <script>
+        $(document).ready(function () {
+            Select_Exam();
+            $("<option value='0'>_blank</option>").appendTo($('#examsele'));
+            $("#examsele").selectpicker('refresh');
+        })
+    </script>
 </body>
 </html>

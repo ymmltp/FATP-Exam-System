@@ -18,7 +18,7 @@ namespace FATP_Exam_System.Ashx
         {
             context.Response.ContentType = "text/plain";
             string type = HttpContext.Current.Request["type"];
-            string examtype = HttpContext.Current.Session["ExamType"].ToString();
+            string examtype = HttpContext.Current.Request.Cookies["examtype"].Value;
             string ql = HttpContext.Current.Request["qlist"];
             List<QuestionInfo> qlist = new List<QuestionInfo>();
             if (!String.IsNullOrEmpty(ql))

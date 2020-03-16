@@ -37,4 +37,8 @@
         </table>
     </div>
 </div>
+    <script src="Scripts/Customer/cookie.js"></script>
+    <script>
+        get_cookie();
+    </script>
 </asp:Content>

@@ -55,37 +55,45 @@ namespace DAL
                 throw new Exception("Please complete the exam information");
             }
             else {
-                int[] singleDB = ArrayRandom_Question(Convert.ToInt32(_examinfo.SingleCount), 0, singledt.Rows.Count);
-                int[] multipleDB = ArrayRandom_Question(Convert.ToInt32(_examinfo.MultipleCount), 0, multipledt.Rows.Count);
-                for (int i = 0; i < singleDB.Length; i++)
+                try
                 {
-                    QuestionInfo QInfo = new QuestionInfo();
-                    int position = singleDB[i];
-                    QInfo.QuestionIndex = i + 1;
-                    QInfo.Question = singledt.Rows[position]["Question"].ToString();
-                    QInfo.QuestionType = "Single";
-                    QInfo.S1 = singledt.Rows[position]["SelectA"].ToString();
-                    QInfo.S2 = singledt.Rows[position]["SelectB"].ToString();
-                    QInfo.S3 = singledt.Rows[position]["SelectC"].ToString();
-                    QInfo.S4 = singledt.Rows[position]["SelectD"].ToString();
-                    QInfo.Answer = singledt.Rows[position]["Answer"].ToString().Split(',');
-                    questionList.Add(QInfo);
+                    int[] multipleDB = ArrayRandom_Question(Convert.ToInt32(_examinfo.MultipleCount), 1, multipledt.Rows.Count+1);
+                    int[] singleDB = ArrayRandom_Question(Convert.ToInt32(_examinfo.SingleCount), 1, singledt.Rows.Count+1);
+                    for (int i = 0; i < singleDB.Length; i++)
+                    {
+                        QuestionInfo QInfo = new QuestionInfo();
+                        int position = singleDB[i]-1;
+                        QInfo.QuestionIndex = i + 1;
+                        QInfo.Question = singledt.Rows[position]["Question"].ToString();
+                        QInfo.QuestionType = "Single";
+                        QInfo.S1 = singledt.Rows[position]["SelectA"].ToString();
+                        QInfo.S2 = singledt.Rows[position]["SelectB"].ToString();
+                        QInfo.S3 = singledt.Rows[position]["SelectC"].ToString();
+                        QInfo.S4 = singledt.Rows[position]["SelectD"].ToString();
+                        QInfo.Answer = singledt.Rows[position]["Answer"].ToString().Split(',');
+                        questionList.Add(QInfo);
+                    }
+                    for (int j = 0; j < multipleDB.Length; j++)
+                    {
+                        QuestionInfo QInfo = new QuestionInfo();
+                        int position = multipleDB[j]-1;
+                        QInfo.QuestionIndex = j + 1 + singleDB.Length;
+                        QInfo.Question = multipledt.Rows[position]["Question"].ToString();
+                        QInfo.QuestionType = "Multiple";
+                        QInfo.S1 = multipledt.Rows[position]["SelectA"].ToString();
+                        QInfo.S2 = multipledt.Rows[position]["SelectB"].ToString();
+                        QInfo.S3 = multipledt.Rows[position]["SelectC"].ToString();
+                        QInfo.S4 = multipledt.Rows[position]["SelectD"].ToString();
+                        QInfo.Answer = multipledt.Rows[position]["Answer"].ToString().Split(',');
+                        questionList.Add(QInfo);
+                    }
+                    return questionList;
                 }
-                for (int j = 0; j < multipleDB.Length; j++)
+                catch (Exception e)
                 {
-                    QuestionInfo QInfo = new QuestionInfo();
-                    int position = multipleDB[j];
-                    QInfo.QuestionIndex = j + 1 + singleDB.Length;
-                    QInfo.Question = multipledt.Rows[position]["Question"].ToString();
-                    QInfo.QuestionType = "Multiple";
-                    QInfo.S1 = multipledt.Rows[position]["SelectA"].ToString();
-                    QInfo.S2 = multipledt.Rows[position]["SelectB"].ToString();
-                    QInfo.S3 = multipledt.Rows[position]["SelectC"].ToString();
-                    QInfo.S4 = multipledt.Rows[position]["SelectD"].ToString();
-                    QInfo.Answer = multipledt.Rows[position]["Answer"].ToString().Split(',');
-                    questionList.Add(QInfo);
+                    string a = e.Message;
+                    throw new Exception(e.Message);
                 }
-                return questionList;
             }
         }
 
@@ -94,20 +102,32 @@ namespace DAL
         {
             Random rd = new Random();
             int[] tmp = new int[QCount];
-            for (int i = 0; i < QCount; i++)
+            try
             {
-                int currentRandom= rd.Next(MinIndex, MaxIndex);
-                bool flag = false; // 没有重复
-                foreach (int figure in tmp) {
-                    if (figure == currentRandom)
-                        flag = true;
+                for (int i = 0; i < QCount; i++)
+                {
+                    int currentRandom = rd.Next(MinIndex, MaxIndex);
+                    bool flag = false; // 没有重复
+                    foreach (int figure in tmp)
+                    {
+                        if (figure == currentRandom)
+                        {
+                            flag = true;
+                            break;
+                        }
+                    }
+                    if (flag)
+                        i = i - 1;
+                    else
+                        tmp[i] = currentRandom;
                 }
-                if (flag)
-                    i = i - 1;
-                else
-                    tmp[i] = currentRandom;
+                return tmp;
             }
-            return tmp;
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+
         }
     }
 }

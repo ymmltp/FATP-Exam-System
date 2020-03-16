@@ -36,6 +36,7 @@ namespace DAL
         //获取用户信息
         public UserInfo GetUserInfo(string ntid,string examtype,string role=null)
         {
+            ad.Domain = domain;
             userinfo.NTID = ntid;
             userinfo.DisplayName = ad.GetADDispalyName(ntid);
             if ( examtype == "0")

@@ -13,7 +13,8 @@ namespace FATP_Exam_System
         {
             if (!IsPostBack)
             {
-                if (Session["UserName"] != null)
+                string username = HttpContext.Current.Request["ntid"];
+                if (username != null)
                 {
                     Error_Text.Text = @"<h3>Sorry,you have no access to this page!</h3></br>
                                     <h5>Please choose _Blank to get into this setting.</br></br>

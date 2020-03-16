@@ -68,6 +68,7 @@
 </div>
 
     <script src="Scripts/Customer/Exam.js"></script>
+    <script src="Scripts/Customer/cookie.js"></script>
     <script>
         $(document).ready(function () {
             Get_ExamInfo()

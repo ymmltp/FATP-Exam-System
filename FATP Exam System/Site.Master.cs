@@ -12,11 +12,15 @@ namespace FATP_Exam_System
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+
             if (!IsPostBack)
             {
-                if (Session["UserName"] != null)
+                string username = HttpContext.Current.Request.Cookies["username"].Value;
+                string ntid = HttpContext.Current.Request.Cookies["ntid"].Value;
+
+                if (username!= null)
                 {
-                    User_ID.Text = Session["UserName"].ToString() +"  ";
+                    User_ID.Text = username.ToString() + "  ";
                     Sign_Off.Visible = true;
                 }
             }

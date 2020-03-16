@@ -20,18 +20,8 @@ namespace FATP_Exam_System.Ashx
             string examtype = context.Request.QueryString["examtype"];
             string department = context.Request.QueryString["department"];
             string project = context.Request.QueryString["project"];
+            string power = context.Request.QueryString["power"];
 
-            if (Int32.Parse(HttpContext.Current.Session["Power"].ToString()) >= 3) //管理员只能查看自己管理的考试
-            {
-                if (string.IsNullOrEmpty(examtype))
-                {
-                    examtype = HttpContext.Current.Session["ExamType"].ToString();
-                }
-                if (examtype == "0")
-                {
-                    examtype = null;
-                }
-            }
 
             DataTable dt = new DataTable();
             string json = "";

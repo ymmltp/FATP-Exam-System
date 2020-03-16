@@ -63,11 +63,13 @@
     <script src="Scripts/bootstrap-select.min.js"></script>
     <script src="Scripts/Customer/SettingJS.js"></script>
     <script src="Scripts/Customer/getScore.js"></script>
+    <script src="Scripts/Customer/cookie.js"></script>
     <script>
         $(document).ready(function () {
             Select_Department();
             Select_Project();
             Select_Exam();
+            get_cookie();
             initial();
         });
             

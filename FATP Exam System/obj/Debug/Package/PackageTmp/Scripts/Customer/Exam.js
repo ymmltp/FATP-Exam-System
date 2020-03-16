@@ -65,7 +65,7 @@ function Get_Question() {
 function Question_Select(object) {
     if (object) {
         Save_Answer(currentQuestionOption, currentQuestionIndex);
-        object.setAttribute("class", "question-list-item selected")
+        object.setAttribute("class", "question-list-item doselected")
         var index = object.getAttribute("data");
         currentQuestionIndex = index;
         currentQuestionOption = object;
@@ -236,6 +236,8 @@ function Calculate_Score() {
 }
 //提交答案(只提交分数)
 function Submit_Answer() {
+    var ntid = getCookie("ntid");
+    var examtype = getCookie("examtype");
     var questionlist = "";
     var questioncontent = "";
     if (finalscore >= examinfo.PassScore) {
@@ -260,7 +262,9 @@ function Submit_Answer() {
         contentType: "application/x-www-form-urlencoded;charset=utf-8",
         data: {
             type:"score",
-            score:finalscore,
+            score: finalscore,
+            ntid: ntid,
+            ExamType: examtype,
         },
         dataType: "json",
         success: function (data) {
@@ -286,7 +290,7 @@ function Check_Answer(object) {
     var qt = currentQuestion.QuestionType;
     var sl = "";
     if (qt === "Single") {
-        if (currentQuestion.S1.length != 0) {
+        if (currentQuestion.S1.length !== 0) {
             sl += '<li class="select-list-item row"><input type="radio" id="s1" value="A" name="Q' + index + '"';
             if (currentQuestion.UserAnswer) {
                 if (currentQuestion.UserAnswer.indexOf('A') >= 0) {

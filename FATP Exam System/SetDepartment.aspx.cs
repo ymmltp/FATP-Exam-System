@@ -13,9 +13,11 @@ namespace FATP_Exam_System
         {
             if (!IsPostBack)
             {
-                if (Session["UserName"] != null)
+                string username = HttpContext.Current.Request["ntid"];
+                string power= HttpContext.Current.Request["power"];
+                if (username != null)
                 {
-                    if (Int32.Parse(Session["Power"].ToString()) < 3)
+                    if (Int32.Parse(power) < 3)
                     {
                         Response.Redirect("Error.aspx", false);
                     }

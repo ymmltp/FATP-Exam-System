@@ -1,35 +1,45 @@
-﻿function initial() {
-    var url = "Ashx/Auth.ashx?type=UserInfo&RandID=" + Math.random();
-    $.ajax({
-        url: url,
-        type: "GET",
-        dataType: "json",
-        success: function (data) {
-            var power = parseInt(data.UserGroup);
-            if (power < 3) {
-                $("#ntid").attr("value", data.NTID);
-                $("#ntid").attr("disabled", "disabled");
-                $("#departmentsele").selectpicker("val", data.Department);
-                $("#departmentsele").attr("disabled", "disabled");
-                $("#departmentsele").selectpicker("refresh");
-                $("#projsele").selectpicker("val", data.Project);
-                $("#projsele").attr("disabled", "disabled");
-                $("#projsele").selectpicker("refresh");
-                Search_Score();
-            }
-        },
-        error: function (data) {
-            alert(data.responseText);
-        },
-    })
-} 
+﻿var examtype;
+var ntid;
+var username;
+var project;
+var departmen;
+var power;
+
+function get_cookie() {
+    examtype = getCookie("examtype");
+    ntid = getCookie("ntid");
+    username = getCookie("username");
+    project = getCookie("project");
+    department = getCookie("department");
+    power = getCookie("power");
+}
+
+function initial() {
+    if (power < 3) {
+        $("#ntid").attr("value", ntid);
+        $("#ntid").attr("disabled", "disabled");
+        $("#departmentsele").selectpicker("val", department);
+        $("#departmentsele").attr("disabled", "disabled");
+        $("#departmentsele").selectpicker("refresh");
+        $("#projsele").selectpicker("val", project);
+        $("#projsele").attr("disabled", "disabled");
+        $("#projsele").selectpicker("refresh");
+        Search_Score();
+    }
+    else if (power < 7) {
+        $("#examsele").selectpicker("val", examtype);
+        $("#examsele").attr("disabled", "disabled");
+        $("#examsele").selectpicker("refresh");
+    }
+}
+   
 
 function Search_Score(){
     var project = $("#projsele").val();
     var examtype = $("#examsele").val();
     var department = $("#departmentsele").val();
     var ntid = $("#ntid").val();
-    var url = encodeURI("Ashx/ScoreSearch.ashx?type=examscore&examtype=" + examtype + "&project=" + project + "&department=" + department + "&ntid="+ntid+"&RandID=" + Math.random());
+    var url = encodeURI("Ashx/ScoreSearch.ashx?type=examscore&power=" + power + "&examtype=" + examtype + "&project=" + project + "&department=" + department + "&ntid=" + ntid + "&RandID=" + Math.random());
     var option = "";
     $.ajax({
         type: "GET",

@@ -1,4 +1,27 @@
-﻿//Select
+﻿var examtype;
+var ntid;
+var username;
+var project;
+var departmen;
+
+function get_cookie() {
+    examtype = getCookie("examtype");
+    ntid = getCookie("ntid");
+    username = getCookie("username");
+    project = getCookie("project");
+    department = getCookie("department");
+    power = getCookie("power");
+}
+function initial() {
+    if (power < 7) {
+        $("#examsele").selectpicker("val", examtype);
+        $("#examsele").attr("disabled", "disabled");
+        $("#examsele").selectpicker("refresh");
+    }
+}
+
+
+//Select
 function Select_Project() {
     var url = "Ashx/GetTable.ashx?type=project&RandID=" + Math.random();
     var option = "";
@@ -219,7 +242,7 @@ function Add_Exam() {
     var singlescore = $("#singlescore-input").val();
     var multiplecount = $("#multiplecount-input").val();
     var multiplescore = $("#multiplescore-input").val();
-    var url = encodeURI("Ashx/Add.ashx?type=exam&examname=" + examname + "&totalscore=" + totalscore + "&passscore=" + passscore + "&singlescore=" + singlescore + "&singlecount=" + singlecount + "&multiplecount=" + multiplecount + "&multiplescore=" + multiplescore + "&RandID=" + Math.random());
+    var url = encodeURI("Ashx/Add.ashx?type=exam&ntid=" + ntid + "&project=" + project + "&department=" + departmen + "&examname=" + examname + "&totalscore=" + totalscore + "&passscore=" + passscore + "&singlescore=" + singlescore + "&singlecount=" + singlecount + "&multiplecount=" + multiplecount + "&multiplescore=" + multiplescore + "&RandID=" + Math.random());
     $.getJSON(url, function (data) {
         alert(data);
     });
@@ -384,7 +407,9 @@ function Edit_Exam(object) {
     $("#Addbtn").attr("onclick", "Save_Exam(" + examtype + ")");
     $("#Addbtn").html("Save");
 }
-function Save_Exam(examtype) {
+
+function Save_Exam(obj) {
+    var examType = obj;
     var examname = $("#examname-input").val();
     var totalscore = $("#totalscore-input").val();
     var passscore = $("#passscore-input").val();
@@ -392,7 +417,7 @@ function Save_Exam(examtype) {
     var singlescore = $("#singlescore-input").val();
     var multiplecount = $("#multiplecount-input").val();
     var multiplescore = $("#multiplescore-input").val();
-    var url = encodeURI("Ashx/Update.ashx?type=exam&examtype=" + examtype + "&examname=" + examname + "&totalscore=" + totalscore + "&passscore=" + passscore + "&singlescore=" + singlescore + "&singlecount=" + singlecount + "&multiplecount=" + multiplecount + "&multiplescore=" + multiplescore + "&RandID=" + Math.random());
+    var url = encodeURI("Ashx/Update.ashx?type=exam&examtype=" + examType + "&examname=" + examname + "&totalscore=" + totalscore + "&passscore=" + passscore + "&singlescore=" + singlescore + "&singlecount=" + singlecount + "&multiplecount=" + multiplecount + "&multiplescore=" + multiplescore + "&RandID=" + Math.random());
     $.getJSON(url, function (data) {
         alert(data);
     });
@@ -440,13 +465,13 @@ function Edit_User(object) {
         },
     });
 }
-function Save_User(userid) {
+function Save_User(obj) {
     var ntid = $("#ntid").val();
     var role = $("#rolesele").val();
     var project = $("#projsele").val();
     var department = $("#departmentsele").val();
     var examtype = $("#examsele").val();
-    var url = encodeURI("Ashx/Update.ashx?type=user&userID=" + userid + "&examtype=" + examtype + "&ntid=" + ntid + "&role=" + role + "&department=" + department + "&project=" + project + "&RandID=" + Math.random());
+    var url = encodeURI("Ashx/Update.ashx?type=user&userID=" + obj + "&examtype=" + examtype + "&ntid=" + ntid + "&role=" + role + "&department=" + department + "&project=" + project + "&RandID=" + Math.random());
     $.getJSON(url, function (data) {
         alert(data);
         //$("#examsele").selectpicker("val", "");

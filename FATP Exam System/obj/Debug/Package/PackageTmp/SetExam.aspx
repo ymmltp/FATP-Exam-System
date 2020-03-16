@@ -98,8 +98,10 @@
 
 </div>
     <script src="Scripts/Customer/SettingJS.js"></script>
+    <script src="Scripts/Customer/cookie.js"></script>
     <script>
-        $(document).ready(function(){
+        $(document).ready(function () {
+            get_cookie();
             Exam_Table();
         })
     </script>

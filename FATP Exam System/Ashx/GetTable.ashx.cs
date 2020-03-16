@@ -43,7 +43,7 @@ namespace FATP_Exam_System.Ashx
             //}
             if (string.IsNullOrEmpty(examtype))
             {
-                examtype = HttpContext.Current.Session["ExamType"].ToString();
+                //examtype = HttpContext.Current.Session["ExamType"].ToString();
             }
 
             switch (type)

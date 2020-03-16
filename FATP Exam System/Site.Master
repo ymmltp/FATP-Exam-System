@@ -47,30 +47,35 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-<%--                    <a class="navbar-brand" id="log" runat="server" href="~/LogIn.aspx" target="_self"><asp:label id="User_ID" runat="server" Font-Bold="true">Log In</asp:label></a>
-                    <a class="navbar-brand" id="appname" runat="server" href="~/">FATP Exam System</a>--%>
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <%--<li><a runat="server" href="~/">Home</a></li>--%>
-                        <li><a runat="server" href="~/Exam.aspx">Exam</a></li>
+                        <li><a href="~/Exam.aspx" runat="server">Exam</a></li>
                         <li class="dropdown" style="overflow:visible">                            
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">Setting<b class="caret"></b></a>
                                 <ul class="dropdown-menu"> 
-                                    <li><a runat="server" href="~/SetExam">Exam Config</a></li>
-                                    <li><a runat="server" href="~/SetUser">Manage User</a></li>
-                                    <li><a runat="server" href="~/SetQuestion">Manage Question</a></li>
+                                    <li><a href="~/SetExam" runat="server">Exam Config</a></li>
+                                    <li><a href="~/SetUser" runat="server">Manage User</a></li>
+                                    <li><a href="~/SetQuestion" runat="server">Manage Question</a></li>
                                     <li role="presentation" class="divider"></li>
-                                    <li><a runat="server" href="~/SetDepartment">Department</a></li>
-                                    <li><a runat="server" href="~/SetProject">Project</a></li>
+                                    <li><a href="~/SetDepartment" runat="server">Department</a></li>
+                                    <li><a href="~/SetProject" runat="server">Project</a></li>
                                 </ul>
                         </li>
-                        <li><a runat="server" href="~/SearchScore">Search Score</a></li>
-                        <li><a runat="server" href="~/ExtendedFile">ExtendedFile</a></li>
+                        <li><a href="~/SearchScore" runat="server">Search Score</a></li>
+                        <li><a href="~/ExtendedFile" runat="server">ExtendedFile</a></li>
+                        <li><a href="http://cnwuxg0te01:8086/TrainFilePath">Study</a></li>
                     </ul>
                     <div class="navbar-right" style="position:absolute;right:10px;">
-                        <a id="log" class="navbar-brand" runat="server" href="~/LogIn.aspx" target="_self"><asp:label id="User_ID" runat="server" Font-Bold="true">Sign In</asp:label></a>
-                        <a id="out" class="navbar-brand" runat="server" href="~/"><asp:Button id="Sign_Off" runat="server" Text="Sign Off" BackColor="#008651" BorderStyle="None" Visible="false" OnClick="Sing_Out_Click"/></a>
+                        <a id="log" class="navbar-brand" href="~/LogIn.aspx" runat="server" target="_self">
+                            <asp:label id="User_ID" runat="server" Font-Bold="true">Sign In</asp:label>
+                            <%--<label id="user_id" style="font-weight:bold">Sing In</label>--%>
+                        </a>
+                        <a id="out" class="navbar-brand"href="~/">
+                            <asp:Button id="Sign_Off" runat="server" Text="Sign Off" BackColor="#008651" BorderStyle="None" Visible="false" OnClick="Sing_Out_Click"/>
+                           <%-- <label id="sign_off" onclick="sign_out_click()" style="display:none">Sing off</label>--%>
+                        </a>
                         <a class="navbar-brand" id="appname" runat="server" href="javascript:void(0)">FATP Exam System</a>
                     </div>
                 </div>

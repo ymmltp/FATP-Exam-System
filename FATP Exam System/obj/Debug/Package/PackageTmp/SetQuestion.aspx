@@ -184,9 +184,12 @@
     <script src="Scripts/Customer/SettingJS.js"></script>
     <script src="Scripts/Customer/ExcelUpload.js"></script>
     <script src="Scripts/Customer/xlsx.full.min.js"></script>
+    <script src="Scripts/Customer/cookie.js"></script>
     <script>
         $(document).ready(function () {
+            get_cookie();
             Select_Exam();
+            initial();
             //Question_Table();
         })
     </script>

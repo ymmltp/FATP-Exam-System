@@ -30,17 +30,17 @@ namespace FATP_Exam_System.Ashx
                     json = Newtonsoft.Json.JsonConvert.SerializeObject(isAuthOk);
                     break;
                 case "GetUserInfo":
-                    userinfo = BLL.Auth.GetUserInfo(ntid, role, examtype);
+                    userinfo = BLL.Auth.GetUserInfo(ntid, examtype, role);
                     json = Newtonsoft.Json.JsonConvert.SerializeObject(userinfo);
                     break;
-                case "UserInfo":
-                    userinfo.NTID = HttpContext.Current.Session["NTID"].ToString();
-                    userinfo.DisplayName = HttpContext.Current.Session["UserName"].ToString();
-                    userinfo.UserGroup = (UserGroupEnum)(Enum.Parse(typeof(UserGroupEnum),HttpContext.Current.Session["Power"].ToString()));
-                    userinfo.Project = HttpContext.Current.Session["Project"].ToString();
-                    userinfo.Department = HttpContext.Current.Session["Department"].ToString();
-                    json = Newtonsoft.Json.JsonConvert.SerializeObject(userinfo);
-                    break;
+                //case "UserInfo":
+                //    userinfo.NTID = HttpContext.Current.Session["NTID"].ToString();
+                //    userinfo.DisplayName = HttpContext.Current.Session["UserName"].ToString();
+                //    userinfo.UserGroup = (UserGroupEnum)(Enum.Parse(typeof(UserGroupEnum),HttpContext.Current.Session["Power"].ToString()));
+                //    userinfo.Project = HttpContext.Current.Session["Project"].ToString();
+                //    userinfo.Department = HttpContext.Current.Session["Department"].ToString();
+                //    json = Newtonsoft.Json.JsonConvert.SerializeObject(userinfo);
+                //    break;
                 default:
                     json = "Sorry,don't have such function...Please check your url";
                     break;
