@@ -57,13 +57,13 @@ namespace DAL
             else {
                 try
                 {
-                    int[] multipleDB = ArrayRandom_Question(Convert.ToInt32(_examinfo.MultipleCount), 1, multipledt.Rows.Count+1);
-                    int[] singleDB = ArrayRandom_Question(Convert.ToInt32(_examinfo.SingleCount), 1, singledt.Rows.Count+1);
+                    int[] multipleDB = ArrayRandom_Question(Convert.ToInt32(_examinfo.MultipleCount), 0, multipledt.Rows.Count-1);
+                    int[] singleDB = ArrayRandom_Question(Convert.ToInt32(_examinfo.SingleCount), 0, singledt.Rows.Count-1);
                     for (int i = 0; i < singleDB.Length; i++)
                     {
                         QuestionInfo QInfo = new QuestionInfo();
-                        int position = singleDB[i]-1;
-                        QInfo.QuestionIndex = i + 1;
+                        int position = singleDB[i];
+                        QInfo.QuestionIndex = i+1;
                         QInfo.Question = singledt.Rows[position]["Question"].ToString();
                         QInfo.QuestionType = "Single";
                         QInfo.S1 = singledt.Rows[position]["SelectA"].ToString();
@@ -76,7 +76,7 @@ namespace DAL
                     for (int j = 0; j < multipleDB.Length; j++)
                     {
                         QuestionInfo QInfo = new QuestionInfo();
-                        int position = multipleDB[j]-1;
+                        int position = multipleDB[j];
                         QInfo.QuestionIndex = j + 1 + singleDB.Length;
                         QInfo.Question = multipledt.Rows[position]["Question"].ToString();
                         QInfo.QuestionType = "Multiple";
@@ -98,30 +98,26 @@ namespace DAL
         }
 
         //从已知库中随机抽取题号
-        private int[] ArrayRandom_Question(int QCount,int MinIndex,int MaxIndex)
+        public static int[] ArrayRandom_Question(int count,int min, int max)
         {
-            Random rd = new Random();
-            int[] tmp = new int[QCount];
-            try
-            {
-                for (int i = 0; i < QCount; i++)
+            try {
+                //生成有序数list
+                List<int> originList = new List<int>();
+                int listcount = max - min + 1;
+                for (int i = 0; i < listcount; i++)
                 {
-                    int currentRandom = rd.Next(MinIndex, MaxIndex);
-                    bool flag = false; // 没有重复
-                    foreach (int figure in tmp)
-                    {
-                        if (figure == currentRandom)
-                        {
-                            flag = true;
-                            break;
-                        }
-                    }
-                    if (flag)
-                        i = i - 1;
-                    else
-                        tmp[i] = currentRandom;
+                    originList.Add(i + min);
                 }
-                return tmp;
+                //生成随机数list
+                List<int> callback = new List<int>();
+                Random random = new Random();
+                for (int i = 0; i < count; i++)
+                {
+                    int place = random.Next(0, listcount - i);
+                    callback.Add(originList[place]);
+                    originList.Remove(originList[place]);
+                }
+                return callback.ToArray();
             }
             catch (Exception e)
             {
@@ -129,5 +125,36 @@ namespace DAL
             }
 
         }
-    }
+            //private int[] ArrayRandom_Question(int QCount,int MinIndex,int MaxIndex)
+            //{
+            //    Random rd = new Random();
+            //    int[] tmp = new int[QCount];
+            //    try
+            //    {
+            //        for (int i = 0; i < QCount; i++)
+            //        {
+            //            int currentRandom = rd.Next(MinIndex, MaxIndex);
+            //            bool flag = false; // 没有重复
+            //            foreach (int figure in tmp)
+            //            {
+            //                if (figure == currentRandom)
+            //                {
+            //                    flag = true;
+            //                    break;
+            //                }
+            //            }
+            //            if (flag)
+            //                i = i - 1;
+            //            else
+            //                tmp[i] = currentRandom;
+            //        }
+            //        return tmp;
+            //    }
+            //    catch (Exception e)
+            //    {
+            //        throw new Exception(e.Message);
+            //    }
+
+            //}
+        }
 }

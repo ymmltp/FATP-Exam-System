@@ -5,7 +5,6 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Model;
-using System.Data;
 
 namespace FATP_Exam_System
 {

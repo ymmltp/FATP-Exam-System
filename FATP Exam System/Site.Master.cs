@@ -20,7 +20,7 @@ namespace FATP_Exam_System
 
                 if (username!= null)
                 {
-                    User_ID.Text = username.ToString() + "  ";
+                    User_ID.Text ="  Welcome ["+ username.ToString() + "]  ";
                     Sign_Off.Visible = true;
                 }
             }

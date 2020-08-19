@@ -137,6 +137,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\examformat.css" />
+    <Content Include="images\ExamSystem.png" />
     <Content Include="PersonalScore.aspx" />
     <Content Include="Scripts\Customer\cookie.js" />
     <Content Include="Scripts\Customer\ExcelUpload.js" />
