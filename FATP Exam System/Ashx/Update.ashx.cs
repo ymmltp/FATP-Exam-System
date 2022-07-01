@@ -16,6 +16,7 @@ namespace FATP_Exam_System.Ashx
             context.Response.ContentType = "text/plain";
             string type = HttpContext.Current.Request["type"];
             string ntid = HttpContext.Current.Request["ntid"];
+            string userName = HttpContext.Current.Request["userName"];
             string role = context.Request.QueryString["role"];
             string examtype = HttpContext.Current.Request["ExamType"];
             string userID = context.Request.QueryString["userID"];
@@ -40,15 +41,6 @@ namespace FATP_Exam_System.Ashx
             string json = "";
             string callback = "";
 
-            //if (string.IsNullOrEmpty(ntid))
-            //{
-            //    ntid= HttpContext.Current.Session["NTID"].ToString();
-            //}
-            //if (string.IsNullOrEmpty(examtype))
-            //{
-            //    examtype = HttpContext.Current.Session["ExamType"].ToString();
-            //}
-
             switch (type)
             {
                 case "exam":
@@ -62,6 +54,9 @@ namespace FATP_Exam_System.Ashx
                     break;
                 case "score":
                     callback = BLL.GetData.Replace_ExamScore(examtype, ntid, score);
+                    break;
+                case "insertscore":
+                    callback = BLL.GetData.Insert_ExamScore(examtype, ntid, userName, score);
                     break;
             }
             json = Newtonsoft.Json.JsonConvert.SerializeObject(callback);

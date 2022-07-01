@@ -25,7 +25,8 @@ function Get_ExamInfo() {
                 questioncontent += '<p>This exam have ' + data.SingleCount + ' single questions and ' + data.MultipleCount + ' multiple questions.</p>' +
                     '<p>Total score:<span style="color:green;font-size:16px;">' + data.TotalScore + '</span></p>' +
                     '<p>Pass Score:<span style="color:green;font-size:16px;">' + data.PassScore + '</span></p>' +
-                    '<p>Please pay attention to question type.</p>' +
+                    '<p>Please pay attention to question type. </p> ' +
+                    '<p> Input your Name: <input id="userName-input" type="text"/> </p>'+
                     '<p>Now Click Start Button.</p>';
                 $("#question-list").html("");
                 $("#question-content").html("");
@@ -182,12 +183,18 @@ function Save_Answer(object,currentindex) {
 }
 
 $("#btn-start").click(function () {
-    $("#btn-last").attr("style", "display:block;background-color:#008651");
-    $("#btn-next").attr("style", "display:block;background-color:#008651");
-    $("#question-list").attr("style", "display:block");
-    $("#btn-start").attr("style", "display:none");
-    var obj = document.getElementById("Q1");
-    Question_Select(obj);
+    if ($("#userName-input").val() == "") {
+        alert("请输入考生信息");
+    }
+    else {
+        $("#exam-user").html($("#userName-input").val())
+        $("#btn-last").attr("style", "display:block;background-color:#008651");
+        $("#btn-next").attr("style", "display:block;background-color:#008651");
+        $("#question-list").attr("style", "display:block");
+        $("#btn-start").attr("style", "display:none");
+        var obj = document.getElementById("Q1");
+        Question_Select(obj);
+    }
 });
 $("#btn-last").click(function () {
     var obj = document.getElementById("Q" + (parseInt(currentQuestionIndex) - 1).toString());
@@ -261,10 +268,11 @@ function Submit_Answer() {
         type: "post",
         contentType: "application/x-www-form-urlencoded;charset=utf-8",
         data: {
-            type:"score",
+            type:"insertscore",
             score: finalscore,
             ntid: ntid,
             ExamType: examtype,
+            userName: $("#exam-user").html()
         },
         dataType: "json",
         success: function (data) {

@@ -4,6 +4,7 @@
     <div class="panel-default" style="margin-top:20px;">
         <div class="panel-heading" style="position:relative;height:40px">
             <span id="exam-info"><b>Exam Name:________</b></span>
+            <span style="right:300px;position:absolute"><b>User Name:</b><b id="exam-user">________</b></span>
             <span id="exam-score"> <b>FinalScore:________</b></span>
         </div>
 

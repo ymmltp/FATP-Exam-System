@@ -4,3 +4,9 @@ C:\Users\1382919\source\repos\FATP Exam System\Model\obj\Release\Model.csprojAss
 C:\Users\1382919\source\repos\FATP Exam System\Model\obj\Release\Model.csproj.CoreCompileInputs.cache
 C:\Users\1382919\source\repos\FATP Exam System\Model\obj\Release\Model.dll
 C:\Users\1382919\source\repos\FATP Exam System\Model\obj\Release\Model.pdb
+C:\Users\1382919\source\repos\FATP-Exam-System\Model\bin\Release\Model.dll
+C:\Users\1382919\source\repos\FATP-Exam-System\Model\bin\Release\Model.pdb
+C:\Users\1382919\source\repos\FATP-Exam-System\Model\obj\Release\Model.csproj.AssemblyReference.cache
+C:\Users\1382919\source\repos\FATP-Exam-System\Model\obj\Release\Model.csproj.CoreCompileInputs.cache
+C:\Users\1382919\source\repos\FATP-Exam-System\Model\obj\Release\Model.dll
+C:\Users\1382919\source\repos\FATP-Exam-System\Model\obj\Release\Model.pdb

@@ -44,19 +44,6 @@
     </div>
     <div class="table-responsive">
         <table class="table table-striped table-sm table-bordered table-hover" id="score-table">
-            <thead>
-                <tr>
-                    <th>Index</th>
-                    <th>ExamName</th>
-                    <th>Department</th>
-                    <th>Project</th>
-                    <th>NTID</th>
-                    <th>Score</th>
-                    <th>TotalScore</th>
-                    <th>ExamTime</th>
-                </tr>
-            </thead>
-            <tbody id="score-table-tr"></tbody>
         </table>
     </div>
 </div>
@@ -64,6 +51,10 @@
     <script src="Scripts/Customer/SettingJS.js"></script>
     <script src="Scripts/Customer/getScore.js"></script>
     <script src="Scripts/Customer/cookie.js"></script>
+    <script src="Scripts/bootstrap-table.min.js"></script>
+    <script src="Scripts/tableExport.min.js"></script>
+    <script src="Scripts/FileSaver.min.js"></script>
+    <script src="Scripts/xlsx.core.min.js"></script>
     <script>
         $(document).ready(function () {
             Select_Department();

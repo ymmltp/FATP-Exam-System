@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="Set Question" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="SetQuestion.aspx.cs" Inherits="FATP_Exam_System.SetQuestion" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="container-fiuled">
+<div class="container-fiuled">
     <div class="panel-default" style="margin-top:20px;">
         <div class="panel-heading"><b>Set Question</b></div>
         <div class="panel-body">

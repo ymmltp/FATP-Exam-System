@@ -407,7 +407,7 @@ namespace DAL
         #region examscore (select replace delete)
         public DataTable GetExamScore_Table(string examtype, string project, string department, string NTID)
         {
-            string sql = @"SELECT (@i:=@i+1)as IndexID,D.ExamName,D.TotalScore,tmp.*,if(tmp.score<D.PassScore,'N','Y') AS IsPass from examconfig D INNER JOIN
+            string sql = @"SELECT D.ExamName,D.TotalScore,tmp.*,if(tmp.score<D.PassScore,'N','Y') AS IsPass from examconfig D INNER JOIN
                         (select  A.*,B.Project,B.Department from examscore A inner JOIN userlist B on A.NTID=B.NTID AND a.ExamType=b.ExamType WHERE 1 ";
             if (!string.IsNullOrEmpty(examtype))
             {
@@ -446,7 +446,7 @@ namespace DAL
             {
                 sql += " and B.NTID='" + NTID + "'";
             }
-            sql += @")tmp ON D.ExamID = tmp.ExamType,(SELECT @i:= 0) as C ORDER BY tmp.ExamType,tmp.Department,tmp.Project";
+            sql += @")tmp ON D.ExamID = tmp.ExamType ORDER BY tmp.ExamType,tmp.Department,tmp.Project";
             DataTable dt = sp.Query(sql);
             return dt;
         }
@@ -479,6 +479,22 @@ namespace DAL
             }
             return mesg;
         }
+        public string Insert_ExamScore(string ExamType, string NTID,string UserName,string Score)
+        {
+            string mesg = " Insert exam score Success!";
+            string sql = string.Format("Insert into  examscore (ExamType,NTID,UserName,Score,ExamTime) values ('{0}','{1}','{2}','{3}','{4}')", 
+                ExamType, NTID, UserName, Score, DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"));
+            try
+            {
+                sp.Insert(sql);
+            }
+            catch (Exception e)
+            {
+                mesg = "Insert Score fail!\n" + e.Message;
+            }
+            return mesg;
+        }
+
         #endregion
     }
 }

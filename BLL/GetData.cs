@@ -138,6 +138,10 @@ namespace BLL
         {
             return _myinfo.Delete_ExamScore(ExamType, NTID);
         }
+
+        public static string Insert_ExamScore(string ExamType, string NTID, string UserName, string Score) {
+            return _myinfo.Insert_ExamScore(ExamType, NTID, UserName, Score);
+        }
         #endregion
     }
 }

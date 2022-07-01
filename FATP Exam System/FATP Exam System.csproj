@@ -139,12 +139,16 @@
     <Content Include="Content\examformat.css" />
     <Content Include="images\ExamSystem.png" />
     <Content Include="PersonalScore.aspx" />
+    <Content Include="Scripts\bootstrap-table-export.min.js" />
     <Content Include="Scripts\Customer\cookie.js" />
     <Content Include="Scripts\Customer\ExcelUpload.js" />
     <Content Include="Scripts\Customer\Exam.js" />
     <Content Include="Scripts\Customer\getScore.js" />
     <Content Include="Scripts\Customer\login.js" />
     <Content Include="Scripts\Customer\xlsx.full.min.js" />
+    <Content Include="Scripts\FileSaver.min.js" />
+    <Content Include="Scripts\tableExport.min.js" />
+    <Content Include="Scripts\xlsx.core.min.js" />
     <Content Include="webinicon.ico" />
     <Content Include="webicon2.ico" />
     <Content Include="ExtendedFile.aspx" />
