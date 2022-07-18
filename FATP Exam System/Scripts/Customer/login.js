@@ -7,10 +7,10 @@
             $("#errormsg2").attr("style", "color:red;");
         }
         else {
-            setCookie("ntid", ntid, 1);
-            setCookie("examtype", examtype, 1);
-            setCookie("username", ntid, 1);
-            setCookie("power", "1", 1);
+            setCookie("ntid", ntid, 20);
+            setCookie("examtype", examtype, 20);
+            setCookie("username", ntid, 20);
+            setCookie("power", "1", 20);
             window.location.href = "Exam.aspx";
         }
     }
@@ -41,10 +41,10 @@
 }
 
 function add_local_cookie(data) {
-    setCookie("ntid", data.NTID, 1);
-    setCookie("examtype", data.ExamType, 1);
-    setCookie("username", data.DisplayName, 1);
-    setCookie("power", data.UserGroup, 1);
-    setCookie("project", data.Project, 1);
-    setCookie("department", data.Department, 1);
+    setCookie("ntid", data.NTID, 20);
+    setCookie("examtype", data.ExamType, 20);
+    setCookie("username", data.DisplayName, 20);
+    setCookie("power", data.UserGroup, 20);
+    setCookie("project", data.Project, 20);
+    setCookie("department", data.Department, 20);
 }
