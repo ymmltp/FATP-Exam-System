@@ -185,6 +185,5 @@ C:\Users\1382919\source\repos\FATP-Exam-System\FATP Exam System\bin\Microsoft.AI
 C:\Users\1382919\source\repos\FATP-Exam-System\FATP Exam System\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 C:\Users\1382919\source\repos\FATP-Exam-System\FATP Exam System\obj\Release\FATP Exam System.csproj.AssemblyReference.cache
 C:\Users\1382919\source\repos\FATP-Exam-System\FATP Exam System\obj\Release\FATP Exam System.csproj.CoreCompileInputs.cache
-C:\Users\1382919\source\repos\FATP-Exam-System\FATP Exam System\obj\Release\FATP Exam System.csproj.CopyComplete
 C:\Users\1382919\source\repos\FATP-Exam-System\FATP Exam System\obj\Release\FATP Exam System.dll
 C:\Users\1382919\source\repos\FATP-Exam-System\FATP Exam System\obj\Release\FATP Exam System.pdb

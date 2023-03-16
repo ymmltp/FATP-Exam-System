@@ -15,28 +15,38 @@
         }
     }
     else {
-        var url = "Ashx/Auth.ashx?type=CheckNTIDAuth&ntid=" + ntid + "&password=" + password + "&RandID=" + Math.random();
-        $.getJSON(url, function (data) {
-            if (data === true) {
-                var url = "Ashx/Auth.ashx?type=GetUserInfo&ntid=" + ntid + "&examtype=" + examtype + "&RandID=" + Math.random();
-                $.getJSON(url, function (data) {
-                    if (data.ExamType === 999999) {
-                        $("#errormsg2").attr("style", "color:red;");
-                    } else {
-                        add_local_cookie(data);
-                        if (data.ExamType == "0") {
-                            window.location.href = "SetExam.aspx";
+        //var url = encodeURI("Ashx/Auth.ashx?type=CheckNTIDAuth&ntid=" + ntid + "&password=" + password + "&RandID=" + Math.random());
+        $.ajax({
+            type: 'GET',
+            url: 'Ashx/Auth.ashx',
+            data: {
+                type: 'CheckNTIDAuth',
+                ntid: ntid,
+                password: password,
+            },
+            dataType: 'json',
+            success: function (data) {
+                if (data === true) {
+                    var url = "Ashx/Auth.ashx?type=GetUserInfo&ntid=" + ntid + "&examtype=" + examtype + "&RandID=" + Math.random();
+                    $.getJSON(url, function (data) {
+                        if (data.ExamType === 999999) {
+                            $("#errormsg2").attr("style", "color:red;");
+                        } else {
+                            add_local_cookie(data);
+                            if (data.ExamType == "0") {
+                                window.location.href = "SetExam.aspx";
+                            }
+                            else {
+                                window.location.href = "Exam.aspx";
+                            }
                         }
-                        else {
-                            window.location.href = "Exam.aspx";
-                        }
-                    }
-                });
+                    });
+                }
+                else {
+                    $("#errormsg1").attr("style", "color:red;");
+                }
             }
-            else {
-                $("#errormsg1").attr("style", "color:red;");
-            }
-        });
+        })
     }
 }
 

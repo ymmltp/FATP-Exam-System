@@ -19,6 +19,5 @@ C:\Users\1382919\source\repos\FATP-Exam-System\BLL\bin\Release\DAL.pdb
 C:\Users\1382919\source\repos\FATP-Exam-System\BLL\bin\Release\Model.pdb
 C:\Users\1382919\source\repos\FATP-Exam-System\BLL\obj\Release\BLL.csproj.AssemblyReference.cache
 C:\Users\1382919\source\repos\FATP-Exam-System\BLL\obj\Release\BLL.csproj.CoreCompileInputs.cache
-C:\Users\1382919\source\repos\FATP-Exam-System\BLL\obj\Release\BLL.csproj.CopyComplete
 C:\Users\1382919\source\repos\FATP-Exam-System\BLL\obj\Release\BLL.dll
 C:\Users\1382919\source\repos\FATP-Exam-System\BLL\obj\Release\BLL.pdb
