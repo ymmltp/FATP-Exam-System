@@ -21,3 +21,4 @@ C:\Users\1382919\source\repos\FATP-Exam-System\BLL\obj\Debug\BLL.csproj.Assembly
 C:\Users\1382919\source\repos\FATP-Exam-System\BLL\obj\Debug\BLL.csproj.CoreCompileInputs.cache
 C:\Users\1382919\source\repos\FATP-Exam-System\BLL\obj\Debug\BLL.dll
 C:\Users\1382919\source\repos\FATP-Exam-System\BLL\obj\Debug\BLL.pdb
+C:\Users\1382919\source\repos\FATP-Exam-System\BLL\obj\Debug\BLL.csproj.CopyComplete
